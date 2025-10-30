@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "168874557598",
+    "project_id": "braindump-1e567",
+    "storage_bucket": "braindump-1e567.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168874557598:android:e0b57166965dd8af303b8f",
+        "android_client_info": {
+          "package_name": "com.caths.braindump"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY1chwEjoso0nBQkPadro37yj_BFits5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
