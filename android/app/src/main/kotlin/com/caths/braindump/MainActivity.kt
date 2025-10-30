@@ -1,4 +1,4 @@
-package com.example.bd_app_v0
+package com.caths.braindump
 
 import io.flutter.embedding.android.FlutterActivity
 
