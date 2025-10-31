@@ -9,7 +9,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('Hello World!!!'))),
+      home: Scaffold(body: Center(child: Text('Hello World!'))),
     );
   }
 }
