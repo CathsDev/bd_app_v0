@@ -14,4 +14,8 @@ class UserEntity {
       createdAt: createdAt ?? this.createdAt,
     );
   }
+
+  @override
+  String toString() =>
+      'UserEntity(id: $id, email: $email, createdAt: $createdAt)';
 }
