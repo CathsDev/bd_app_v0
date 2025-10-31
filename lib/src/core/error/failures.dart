@@ -1,16 +1,14 @@
 abstract final class Failures {
-  const Failures();
+  final String message;
+  const Failures([this.message = 'An error occurred.']);
 }
 
 final class ServerFailure extends Failures {
-  final String message;
-
-  ServerFailure([this.message = 'Server error occurred']);
+  const ServerFailure([super.message = 'Server error occurred']);
 }
 
 final class AuthFailure extends Failures {
-  final String message;
-  const AuthFailure([this.message = 'Authentication error occurred']);
+  const AuthFailure([super.message = 'Authentication error occurred']);
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -22,18 +20,15 @@ final class AuthFailure extends Failures {
 }
 
 final class CacheFailure extends Failures {
-  final String message;
-  const CacheFailure([this.message = 'Cache error occurred']);
+  const CacheFailure([super.message = 'Cache error occurred']);
 }
 
 final class NetworkFailure extends Failures {
-  final String message;
-  const NetworkFailure([this.message = 'Network error occurred']);
+  const NetworkFailure([super.message = 'Network error occurred']);
 }
 
 final class InputFailure extends Failures {
-  final String message;
-  const InputFailure([this.message = 'Input error occurred']);
+  const InputFailure([super.message = 'Input error occurred']);
 }
 
 final class InvalidCredentialsFailure extends AuthFailure {

@@ -1,7 +1,9 @@
 import 'package:bd_app_v0/src/core/error/exceptions.dart';
+import 'package:bd_app_v0/src/core/providers/firebase_providers.dart';
 import 'package:bd_app_v0/src/features/auth/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract interface class AuthRemoteDatasource {
   Future<UserModel> signInWithEmailAndPassword(String email, String password);
@@ -121,3 +123,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     }
   }
 }
+
+final authRemoteDatasourceProvider = Provider<AuthRemoteDatasource>((ref) {
+  return AuthRemoteDatasourceImpl(ref.watch(firebaseAuthProvider));
+});
