@@ -1,5 +1,6 @@
 abstract final class AppRoutes {
   static const home = 'home';
+  static const onboarding = 'onboarding';
   static const moodSelect = 'mood-select';
   static const modeSelect = 'mode-select';
   static const areaSelect = 'area-select';

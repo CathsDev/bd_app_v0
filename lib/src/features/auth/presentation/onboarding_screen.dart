@@ -97,7 +97,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       textAlign: TextAlign.center,
       style: Theme.of(
         context,
-      ).textTheme.bodyMedium?.copyWith(color: ColorPalette.text0),
+      ).textTheme.bodyLarge?.copyWith(color: ColorPalette.text0),
     );
   }
 

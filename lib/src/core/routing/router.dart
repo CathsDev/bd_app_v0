@@ -1,33 +1,103 @@
 import 'package:bd_app_v0/src/core/routing/route_names.dart';
+import 'package:bd_app_v0/src/features/activity_select/presentation/activity_select_screen.dart';
+import 'package:bd_app_v0/src/features/area_select/presentation/area_select_screen.dart';
+import 'package:bd_app_v0/src/features/auth/presentation/onboarding_screen.dart';
+import 'package:bd_app_v0/src/features/auth/providers/auth_provider.dart';
+import 'package:bd_app_v0/src/features/emergency/presentation/emergency_screen.dart';
 import 'package:bd_app_v0/src/features/home/presentation/home_screen.dart';
+import 'package:bd_app_v0/src/features/mode_select/presentation/mode_select_screen.dart';
 import 'package:bd_app_v0/src/features/mood_select/presentation/mood_select_screen.dart';
+import 'package:bd_app_v0/src/features/settings/presentation/settings_screen.dart';
+import 'package:bd_app_v0/src/features/task_complete/presentation/task_complete_screen.dart';
+import 'package:bd_app_v0/src/features/task_timer/presentation/task_timer_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-final GoRouter appRouter = GoRouter(
-  initialLocation: '/',
-  routes: <RouteBase>[
-    GoRoute(
-      name: AppRoutes.home,
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
-      },
-    ),
-    GoRoute(
-      name: AppRoutes.moodSelect,
-      path: '/${AppRoutes.moodSelect}',
-      builder: (BuildContext context, GoRouterState state) {
-        return const MoodSelectScreen();
-      },
-    ),
-    GoRoute(
-      name: AppRoutes.modeSelect,
-      path: '/${AppRoutes.modeSelect}',
-      builder: (BuildContext context, GoRouterState state) {
-        return const MoodSelectScreen();
-      },
-    ),
-  ],
-  errorBuilder: (context, state) => const HomeScreen(),
-);
+final routerProvider = Provider<GoRouter>((ref) {
+  final authState = ref.watch(authStateProvider);
+
+  return GoRouter(
+    initialLocation: '/',
+    redirect: (context, state) {
+      // Wait for auth to load
+      final isLoading = authState is AsyncLoading;
+      final isAuth = authState.value != null;
+
+      // Loading
+      if (isLoading) {
+        return null; // Keep current location while loading
+      }
+
+      // Not authenticated
+      if (!isAuth) {
+        // Allow onboarding
+        if (state.matchedLocation == '/onboarding') {
+          return null;
+        }
+        return '/onboarding';
+      }
+
+      // Authenticated - redirect from onboarding to home
+      if (isAuth && state.matchedLocation == '/onboarding') {
+        return '/';
+      }
+
+      return null; // No redirect
+    },
+    routes: [
+      GoRoute(
+        path: '/onboarding',
+        name: AppRoutes.onboarding,
+        builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: '/',
+        name: AppRoutes.home,
+        builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: '/mood-select',
+        name: AppRoutes.moodSelect,
+        builder: (context, state) => const MoodSelectScreen(),
+      ),
+      GoRoute(
+        path: '/mode-select',
+        name: AppRoutes.modeSelect,
+        builder: (context, state) => const ModeSelectScreen(),
+      ),
+      GoRoute(
+        path: '/area-select',
+        name: AppRoutes.areaSelect,
+        builder: (context, state) => const AreaSelectScreen(),
+      ),
+      GoRoute(
+        path: '/activity-select',
+        name: AppRoutes.activitySelect,
+        builder: (context, state) => const ActivitySelectScreen(),
+      ),
+      GoRoute(
+        path: '/task-timer',
+        name: AppRoutes.taskTimer,
+        builder: (context, state) => const TaskTimerScreen(),
+      ),
+      GoRoute(
+        path: '/task-complete',
+        name: AppRoutes.taskComplete,
+        builder: (context, state) => const TaskCompleteScreen(),
+      ),
+      GoRoute(
+        path: '/settings',
+        name: AppRoutes.settings,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: '/emergency',
+        name: AppRoutes.emergency,
+        builder: (context, state) => const EmergencyScreen(),
+      ),
+    ],
+    errorBuilder: (context, state) =>
+        const Scaffold(body: Center(child: Text('Page not found'))),
+  );
+});

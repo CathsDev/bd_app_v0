@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MoodSelectScreen extends StatelessWidget {
-  const MoodSelectScreen({super.key});
+class TaskCompleteScreen extends StatelessWidget {
+  const TaskCompleteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mood Select'),
+        title: const Text('Task Complete'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
@@ -21,7 +21,7 @@ class MoodSelectScreen extends StatelessWidget {
             const Icon(Icons.mood, size: 100),
             const SizedBox(height: 20),
             Text(
-              'Mood Select Screen',
+              'Task Complete Screen',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 10),
