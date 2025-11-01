@@ -15,14 +15,8 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final userModel = await remoteDatasource.getCurrentUser();
       return Right(userModel);
-    } on AuthException catch (e) {
-      return Left(AuthFailure(e.message));
-    } on NetworkException {
-      return const Left(NetworkFailure());
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred.'));
+      return Left(_mapExceptionToFailure(e));
     }
   }
 
@@ -36,18 +30,25 @@ class AuthRepositoryImpl implements AuthRepository {
         email,
         password,
       );
-
       return Right(userModel);
-    } on InvalidCredentialsException catch (e) {
-      return Left(InvalidCredentialsFailure(e.message));
-    } on NetworkException {
-      return const Left(NetworkFailure());
-    } on AuthException catch (e) {
-      return Left(AuthFailure(e.message));
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred.'));
+      return Left(_mapExceptionToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failures, UserEntity>> createUserWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      final userModel = await remoteDatasource.createUserWithEmailAndPassword(
+        email,
+        password,
+      );
+      return Right(userModel);
+    } catch (e) {
+      return Left(_mapExceptionToFailure(e));
     }
   }
 
@@ -56,17 +57,25 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await remoteDatasource.signOut();
       return const Right(null);
-    } on NetworkException {
-      return const Left(NetworkFailure());
-    } on AuthException catch (e) {
-      return Left(AuthFailure(e.message));
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(
-        ServerFailure('An unexpected error occurred during sign-out.'),
-      );
+      return Left(_mapExceptionToFailure(e));
     }
+  }
+
+  Failures _mapExceptionToFailure(dynamic exception) {
+    if (exception is InvalidCredentialsException) {
+      return InvalidCredentialsFailure(exception.message);
+    }
+    if (exception is NetworkException) {
+      return const NetworkFailure();
+    }
+    if (exception is AuthException) {
+      return AuthFailure(exception.message);
+    }
+    if (exception is ServerException) {
+      return ServerFailure(exception.message);
+    }
+    return const ServerFailure('An unexpected error occurred.');
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:bd_app_v0/src/features/auth/domain/entities/user_entity.dart';
 import 'package:bd_app_v0/src/features/auth/domain/usecases/get_current_user_usecase.dart';
+import 'package:bd_app_v0/src/features/auth/domain/usecases/register_usecase.dart';
 import 'package:bd_app_v0/src/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:bd_app_v0/src/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,9 +40,18 @@ class AuthNotifier extends Notifier<AuthState> {
 
   Future<void> signIn(String email, String password) async {
     state = const AuthStateLoading();
-
     final result = await ref.read(signInUseCaseProvider).call(email, password);
+    state = result.fold(
+      (failure) => AuthStateError(failure.message),
+      (user) => AuthStateAuthenticated(user),
+    );
+  }
 
+  Future<void> register(String email, String password) async {
+    state = const AuthStateLoading();
+    final result = await ref
+        .read(registerUseCaseProvider)
+        .call(email, password);
     state = result.fold(
       (failure) => AuthStateError(failure.message),
       (user) => AuthStateAuthenticated(user),

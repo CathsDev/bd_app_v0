@@ -7,6 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 abstract interface class AuthRemoteDatasource {
   Future<UserModel> signInWithEmailAndPassword(String email, String password);
+  Future<UserModel> createUserWithEmailAndPassword(
+    String email,
+    String password,
+  );
   Future<void> signOut();
   Future<UserModel> getCurrentUser();
 }
@@ -20,31 +24,13 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     try {
       final currentUser = fireAuth.currentUser;
 
-      // Nutzer angemeldet
       if (currentUser == null) {
         throw const AuthException('No active user is currently signed in.');
       }
 
-      return UserModel(
-        id: currentUser.uid,
-        email: currentUser.email ?? '',
-        createdAt: currentUser.metadata.creationTime ?? DateTime.now(),
-      );
-    } on FirebaseAuthException catch (e) {
-      throw AuthException(
-        e.message ?? 'Firebase Auth error while getting current user',
-      );
-    } on PlatformException catch (e) {
-      if (e.code == 'network-request-failed') {
-        throw const NetworkException();
-      }
-      throw ServerException(
-        e.message ?? 'Platform error while getting current user',
-      );
+      return _mapUserToModel(currentUser);
     } catch (e) {
-      throw const ServerException(
-        'An unexpected error occurred while fetching user.',
-      );
+      throw _handleException(e, 'getting current user');
     }
   }
 
@@ -60,48 +46,39 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       );
 
       final user = userCredential.user;
-
       if (user == null) {
         throw const ServerException(
           'Sign-in succeeded but user object is null.',
         );
       }
 
-      return UserModel(
-        id: user.uid,
-        email: user.email ?? email,
-        createdAt: user.metadata.creationTime ?? DateTime.now(),
-      );
-    }
-    // Firebase-Authentifizierungsfehler
-    on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'user-not-found':
-        case 'wrong-password':
-        case 'invalid-email':
-          // falsche Anmeldedaten
-          throw const InvalidCredentialsException('Invalid email or password.');
-        case 'user-disabled':
-          // Benutzer gesperrt
-          throw const AuthException('This account has been disabled.');
-        case 'too-many-requests':
-          // zu vielen Versuche
-          throw AuthException('Too many attempts. Try again later.');
-        default:
-          // FirebaseAuthExceptions
-          throw AuthException(
-            e.message ?? 'An unknown authentication error occurred',
-          );
-      }
-    }
-    // Netzwerkfehler
-    on PlatformException catch (e) {
-      if (e.code == 'network-request-failed') {
-        throw const NetworkException();
-      }
-      throw ServerException(e.message ?? 'Platform error during sign-in.');
+      return _mapUserToModel(user, fallbackEmail: email);
     } catch (e) {
-      throw const AuthException('An unknown error occurred during sign-in.');
+      throw _handleAuthException(e, isSignIn: true);
+    }
+  }
+
+  @override
+  Future<UserModel> createUserWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
+    try {
+      final userCredential = await fireAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final user = userCredential.user;
+      if (user == null) {
+        throw const ServerException(
+          'Registration succeeded but user object is null.',
+        );
+      }
+
+      return _mapUserToModel(user, fallbackEmail: email);
+    } catch (e) {
+      throw _handleAuthException(e, isSignIn: false);
     }
   }
 
@@ -109,18 +86,90 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
   Future<void> signOut() async {
     try {
       await fireAuth.signOut();
-    } on FirebaseAuthException catch (e) {
-      throw AuthException(e.message ?? 'Error while signing out.');
-    } on PlatformException catch (e) {
-      if (e.code == 'network-request-failed') {
-        throw const NetworkException();
-      }
-      throw ServerException(e.message ?? 'Platform error during sign-out.');
     } catch (e) {
-      throw const AuthException(
-        'An unexpected error occurred during sign-out.',
+      throw _handleException(e, 'signing out');
+    }
+  }
+
+  // Helper Methods
+  UserModel _mapUserToModel(User user, {String? fallbackEmail}) {
+    return UserModel(
+      id: user.uid,
+      email: user.email ?? fallbackEmail ?? '',
+      createdAt: user.metadata.creationTime ?? DateTime.now(),
+    );
+  }
+
+  Exception _handleAuthException(dynamic error, {required bool isSignIn}) {
+    if (error is FirebaseAuthException) {
+      return _mapFirebaseAuthException(error, isSignIn: isSignIn);
+    }
+    if (error is PlatformException) {
+      return _mapPlatformException(error);
+    }
+    final action = isSignIn ? 'sign-in' : 'registration';
+    return AuthException('An unknown error occurred during $action.');
+  }
+
+  Exception _handleException(dynamic error, String action) {
+    if (error is AuthException) return error;
+    if (error is FirebaseAuthException) {
+      return AuthException(
+        error.message ?? 'Firebase Auth error while $action',
       );
     }
+    if (error is PlatformException) {
+      return _mapPlatformException(error);
+    }
+    return ServerException('An unexpected error occurred while $action.');
+  }
+
+  Exception _mapFirebaseAuthException(
+    FirebaseAuthException e, {
+    required bool isSignIn,
+  }) {
+    switch (e.code) {
+      // Sign In Errors
+      case 'user-not-found':
+      case 'wrong-password':
+      case 'invalid-email':
+        if (isSignIn) {
+          return const InvalidCredentialsException(
+            'Invalid email or password.',
+          );
+        }
+        return AuthException(e.message ?? 'Invalid credentials.');
+
+      // Registration Errors
+      case 'email-already-in-use':
+        return const AuthException('This email is already registered.');
+      case 'weak-password':
+        return const AuthException(
+          'Password is too weak. Please use a stronger password.',
+        );
+      case 'operation-not-allowed':
+        return const AuthException('Email/password accounts are not enabled.');
+
+      // Common Errors
+      case 'user-disabled':
+        return const AuthException('This account has been disabled.');
+      case 'too-many-requests':
+        return const AuthException('Too many attempts. Try again later.');
+      case 'network-request-failed':
+        return const NetworkException();
+
+      default:
+        return AuthException(
+          e.message ?? 'An unknown authentication error occurred',
+        );
+    }
+  }
+
+  Exception _mapPlatformException(PlatformException e) {
+    if (e.code == 'network-request-failed') {
+      return const NetworkException();
+    }
+    return ServerException(e.message ?? 'Platform error occurred.');
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:bd_app_v0/src/core/theme/app_theme.dart';
+import 'package:bd_app_v0/src/features/auth/presentation/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -9,7 +10,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('Hello World!!!'))),
+      home: OnboardingScreen(),
     );
   }
 }
