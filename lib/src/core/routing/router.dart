@@ -1,5 +1,4 @@
 import 'package:bd_app_v0/src/core/routing/route_names.dart';
-import 'package:bd_app_v0/src/features/auth/presentation/onboarding_screen.dart';
 import 'package:bd_app_v0/src/features/home/presentation/home_screen.dart';
 import 'package:bd_app_v0/src/features/mood_select/presentation/mood_select_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ final GoRouter appRouter = GoRouter(
       name: AppRoutes.home,
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const OnboardingScreen();
+        return const HomeScreen();
       },
     ),
     GoRoute(
