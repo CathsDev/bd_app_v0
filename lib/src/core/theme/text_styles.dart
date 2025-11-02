@@ -64,4 +64,10 @@ abstract final class TextStyles {
       letterSpacing: 0.1,
     ),
   );
+
+  static TextStyle get appTitle => TextStyle(
+    color: ColorPalette.text0,
+    fontSize: 48.0,
+    fontWeight: FontWeight.w500,
+  );
 }
