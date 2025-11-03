@@ -12,27 +12,19 @@ const moods = <MoodModel>[
   MoodModel(
     id: 'very_bad',
     label: 'Sehr schlecht',
-    icon: Icons.sentiment_satisfied_rounded,
+    icon: Icons.sentiment_very_dissatisfied_rounded,
   ),
   MoodModel(
     id: 'bad',
     label: 'Schlecht',
-    icon: Icons.sentiment_satisfied_rounded,
+    icon: Icons.sentiment_dissatisfied_rounded,
   ),
-  MoodModel(
-    id: 'sad',
-    label: 'Traurig',
-    icon: Icons.sentiment_satisfied_rounded,
-  ),
-  MoodModel(
-    id: 'tired',
-    label: 'Müde',
-    icon: Icons.sentiment_satisfied_rounded,
-  ),
+  MoodModel(id: 'sad', label: 'Traurig', icon: Icons.sentiment_neutral_rounded),
+  MoodModel(id: 'tired', label: 'Müde', icon: Icons.bedtime_rounded),
   MoodModel(id: 'happy', label: 'gut', icon: Icons.sentiment_satisfied_rounded),
   MoodModel(
     id: 'very_happy',
     label: 'Sehr gut',
-    icon: Icons.sentiment_satisfied_rounded,
+    icon: Icons.sentiment_very_satisfied_rounded,
   ),
 ];
