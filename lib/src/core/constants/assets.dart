@@ -12,4 +12,6 @@ abstract final class AssetsPath {
   static const taskCard = 'assets/images/cards/tasks.png';
   static const home = 'assets/images/onboarding/onboarding1.png';
   static const logo = 'assets/logo/bd_logo_text0.png';
+  static const area = 'assets/images/cards/area.png';
+  static const activity = 'assets/images/cards/tasks.png';
 }
