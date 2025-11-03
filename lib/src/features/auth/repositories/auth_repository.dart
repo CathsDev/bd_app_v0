@@ -1,5 +1,4 @@
 import 'package:bd_app_v0/src/core/providers/firebase_providers.dart';
-import 'package:bd_app_v0/src/features/auth/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -49,3 +48,41 @@ class AuthRepository {
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   return AuthRepository(ref.watch(firebaseAuthProvider));
 });
+
+class UserModel extends UserEntity {
+  const UserModel({
+    required super.id,
+    required super.email,
+    required super.createdAt,
+  });
+
+  factory UserModel.fromFirebaseUser(User user) {
+    return UserModel(
+      id: user.uid,
+      email: user.email ?? '',
+      createdAt: user.metadata.creationTime ?? DateTime.now(),
+    );
+  }
+}
+
+class UserEntity {
+  final String id;
+  final String email;
+  final DateTime createdAt;
+  const UserEntity({
+    required this.id,
+    required this.email,
+    required this.createdAt,
+  });
+  UserEntity copyWith({String? id, String? email, DateTime? createdAt}) {
+    return UserEntity(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
+  @override
+  String toString() =>
+      'UserEntity(id: $id, email: $email, createdAt: $createdAt)';
+}

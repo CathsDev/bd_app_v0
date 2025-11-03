@@ -1,4 +1,3 @@
-import 'package:bd_app_v0/src/features/auth/models/user_model.dart';
 import 'package:bd_app_v0/src/features/auth/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
