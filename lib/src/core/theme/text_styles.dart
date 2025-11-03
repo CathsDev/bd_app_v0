@@ -70,4 +70,13 @@ abstract final class TextStyles {
     fontSize: 48.0,
     fontWeight: FontWeight.w500,
   );
+
+  static TextStyle get cardTitle => TextStyle(
+    color: ColorPalette.text0,
+    fontSize: 22.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle get cardSubtitle =>
+      TextStyle(color: ColorPalette.text0, fontSize: 14.0, height: 1.32);
 }

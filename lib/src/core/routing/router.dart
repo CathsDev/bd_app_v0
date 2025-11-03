@@ -49,52 +49,102 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/onboarding',
         name: AppRoutes.onboarding,
-        builder: (context, state) => const OnboardingScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const OnboardingScreen(),
+        ),
+        //builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
         path: '/',
         name: AppRoutes.home,
-        builder: (context, state) => const HomeScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const HomeScreen(),
+        ),
+        //builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
         path: '/mood-select',
         name: AppRoutes.moodSelect,
-        builder: (context, state) => const MoodSelectScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const MoodSelectScreen(),
+        ),
+        //builder: (context, state) => const MoodSelectScreen(),
       ),
       GoRoute(
         path: '/mode-select',
         name: AppRoutes.modeSelect,
-        builder: (context, state) => const ModeSelectScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const ModeSelectScreen(),
+        ),
+        //builder: (context, state) => const ModeSelectScreen(),
       ),
       GoRoute(
         path: '/area-select',
         name: AppRoutes.areaSelect,
-        builder: (context, state) => const AreaSelectScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const AreaSelectScreen(),
+        ),
+        //builder: (context, state) => const AreaSelectScreen(),
       ),
       GoRoute(
         path: '/activity-select',
         name: AppRoutes.activitySelect,
-        builder: (context, state) => const ActivitySelectScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const ActivitySelectScreen(),
+        ),
+        //builder: (context, state) => const ActivitySelectScreen(),
       ),
       GoRoute(
         path: '/task-timer',
         name: AppRoutes.taskTimer,
-        builder: (context, state) => const TaskTimerScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const TaskTimerScreen(),
+        ),
+        //builder: (context, state) => const TaskTimerScreen(),
       ),
       GoRoute(
         path: '/task-complete',
         name: AppRoutes.taskComplete,
-        builder: (context, state) => const TaskCompleteScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const TaskCompleteScreen(),
+        ),
+        //builder: (context, state) => const TaskCompleteScreen(),
       ),
       GoRoute(
         path: '/settings',
         name: AppRoutes.settings,
-        builder: (context, state) => const SettingsScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const SettingsScreen(),
+        ),
+        //builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: '/emergency',
         name: AppRoutes.emergency,
-        builder: (context, state) => const EmergencyScreen(),
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const EmergencyScreen(),
+        ),
+        //builder: (context, state) => const EmergencyScreen(),
       ),
     ],
     errorBuilder: (context, state) =>
