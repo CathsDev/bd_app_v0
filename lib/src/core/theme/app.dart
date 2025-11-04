@@ -1,3 +1,4 @@
+import 'package:bd_app_v0/src/core/config/app_config.dart';
 import 'package:bd_app_v0/src/core/routing/router.dart';
 import 'package:bd_app_v0/src/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,8 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       theme: AppTheme.darkTheme,
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: AppConfig.debugBanner,
+      title: AppConfig.appName,
       routerConfig: router,
     );
   }
