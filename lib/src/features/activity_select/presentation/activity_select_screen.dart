@@ -1,33 +1,62 @@
+import 'package:bd_app_v0/src/core/constants/assets.dart';
+import 'package:bd_app_v0/src/core/routing/route_names.dart';
+import 'package:bd_app_v0/src/core/theme/text_styles.dart';
+import 'package:bd_app_v0/src/features/activity_select/models/activity_model.dart';
+import 'package:bd_app_v0/src/features/activity_select/providers/activity_select_provider.dart';
+import 'package:bd_app_v0/src/shared/widgets/cards/activity_card.dart';
+import 'package:bd_app_v0/src/shared/widgets/header/header_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ActivitySelectScreen extends StatelessWidget {
+class ActivitySelectScreen extends ConsumerWidget {
   const ActivitySelectScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedId = ref.watch(activitySelectProvider).selectedId;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Activity Select'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.mood, size: 100),
-            const SizedBox(height: 20),
-            Text(
-              'Activity Select Screen',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          HeaderImage(
+            assetsPath: AssetsPath.activity,
+            showBack: true,
+            showHome: true,
+          ),
+          Semantics(
+            header: true,
+            label: 'Tätigkeit',
+            hint: 'Tätigkeit auswählen',
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Text(
+                'Welcher Tätigkeit hat Priorität?',
+                style: TextStyles.textTheme.headlineLarge,
+              ),
             ),
-            const SizedBox(height: 10),
-            const Text('Coming soon...'),
-          ],
-        ),
+          ),
+          Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 32),
+              itemBuilder: (context, index) {
+                final activity = activities[index];
+                return ActivityCard(
+                  model: activity,
+                  selected: activity.id == selectedId,
+                  onTap: () {
+                    ref
+                        .read(activitySelectProvider.notifier)
+                        .setSelected(activity.id);
+                    context.pushNamed(AppRoutes.taskTimer);
+                  },
+                );
+              },
+              separatorBuilder: (_, _) => const SizedBox.shrink(),
+              itemCount: activities.length,
+            ),
+          ),
+        ],
       ),
     );
   }
