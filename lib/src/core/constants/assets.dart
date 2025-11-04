@@ -14,4 +14,5 @@ abstract final class AssetsPath {
   static const logo = 'assets/logo/bd_logo_text0.png';
   static const area = 'assets/images/cards/area.png';
   static const activity = 'assets/images/cards/tasks.png';
+  static const areaPlaceholder = 'assets/images/areas/placeholder_areas.png';
 }
