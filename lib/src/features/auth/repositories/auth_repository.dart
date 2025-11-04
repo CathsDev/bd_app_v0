@@ -1,4 +1,4 @@
-import 'package:bd_app_v0/src/core/providers/firebase_providers.dart';
+import 'package:bd_app_v0/src/core/providers/firebase_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

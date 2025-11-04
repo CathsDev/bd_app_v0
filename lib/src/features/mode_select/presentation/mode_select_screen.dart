@@ -1,4 +1,5 @@
 import 'package:bd_app_v0/src/core/constants/assets.dart';
+import 'package:bd_app_v0/src/core/providers/session_provider.dart';
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/mode_select/models/mode_model.dart';
 import 'package:bd_app_v0/src/features/mode_select/providers/mode_select_provider.dart';
@@ -49,6 +50,7 @@ class ModeSelectScreen extends ConsumerWidget {
                   selected: mode.id == selectedId,
                   onTap: () {
                     ref.read(modeSelectProvider.notifier).setSelected(mode.id);
+                    ref.read(sessionProvider.notifier).updateMode(mode.id);
                     context.pushNamed(mode.route);
                   },
                 );

@@ -1,4 +1,5 @@
 import 'package:bd_app_v0/src/core/constants/assets.dart';
+import 'package:bd_app_v0/src/core/providers/session_provider.dart';
 import 'package:bd_app_v0/src/core/routing/route_names.dart';
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/area_select/models/area_model.dart';
@@ -47,6 +48,7 @@ class AreaSelectScreen extends ConsumerWidget {
                   selected: area.id == selectedId,
                   onTap: () {
                     ref.read(areaSelectProvider.notifier).setSelected(area.id);
+                    ref.read(sessionProvider.notifier).updateArea(area.id);
                     context.pushNamed(AppRoutes.taskTimer);
                   },
                 );

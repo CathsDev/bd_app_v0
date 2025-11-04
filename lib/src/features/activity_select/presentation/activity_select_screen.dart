@@ -1,4 +1,5 @@
 import 'package:bd_app_v0/src/core/constants/assets.dart';
+import 'package:bd_app_v0/src/core/providers/session_provider.dart';
 import 'package:bd_app_v0/src/core/routing/route_names.dart';
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/activity_select/models/activity_model.dart';
@@ -49,6 +50,9 @@ class ActivitySelectScreen extends ConsumerWidget {
                     ref
                         .read(activitySelectProvider.notifier)
                         .setSelected(activity.id);
+                    ref
+                        .read(sessionProvider.notifier)
+                        .updateActivity(activity.id);
                     context.pushNamed(AppRoutes.taskTimer);
                   },
                 );

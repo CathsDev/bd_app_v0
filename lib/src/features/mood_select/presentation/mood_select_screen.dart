@@ -1,3 +1,4 @@
+import 'package:bd_app_v0/src/core/providers/session_provider.dart';
 import 'package:bd_app_v0/src/core/routing/route_names.dart';
 import 'package:bd_app_v0/src/core/theme/color_palette.dart';
 import 'package:bd_app_v0/src/features/mood_select/models/mood_model.dart';
@@ -13,9 +14,10 @@ class MoodSelectScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedId = ref.watch(moodSelectProvider).selectedId;
-    final canContinue = selectedId != null;
+    final selectedMood = ref.watch(moodSelectProvider).selectedId;
+    final canContinue = selectedMood != null;
     final cs = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -50,13 +52,15 @@ class MoodSelectScreen extends ConsumerWidget {
                 mainAxisSpacing: 16,
                 childAspectRatio: 0.95, // leicht höher als breit
                 children: [
-                  for (final m in moods)
+                  for (final mood in moods)
                     MoodTile(
-                      mood: m,
-                      selected: m.id == selectedId,
-                      onTap: () => ref
-                          .read(moodSelectProvider.notifier)
-                          .setSelected(m.id),
+                      mood: mood,
+                      selected: mood.id == selectedMood,
+                      onTap: () {
+                        ref
+                            .read(moodSelectProvider.notifier)
+                            .setSelected(mood.id);
+                      },
                       cs: cs,
                     ),
                 ],
@@ -76,7 +80,12 @@ class MoodSelectScreen extends ConsumerWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: canContinue
-                      ? () => context.pushNamed(AppRoutes.modeSelect)
+                      ? () {
+                          ref
+                              .read(sessionProvider.notifier)
+                              .updateMood(selectedMood);
+                          context.pushNamed(AppRoutes.modeSelect);
+                        }
                       : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorPalette.petrol2,

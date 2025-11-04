@@ -1,8 +1,13 @@
 import 'package:bd_app_v0/src/core/routing/route_names.dart';
+import 'package:bd_app_v0/src/features/activity_select/providers/activity_select_provider.dart';
+import 'package:bd_app_v0/src/features/area_select/providers/area_select_provider.dart';
+import 'package:bd_app_v0/src/features/mode_select/providers/mode_select_provider.dart';
+import 'package:bd_app_v0/src/features/mood_select/providers/mood_select_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class HeaderImage extends StatelessWidget {
+class HeaderImage extends ConsumerWidget {
   // Image
   final String assetsPath;
 
@@ -28,7 +33,7 @@ class HeaderImage extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // Header Höhe
     final mq = MediaQuery.of(context);
     final screenHeight = mq.size.height;
@@ -163,7 +168,13 @@ class HeaderImage extends StatelessWidget {
                       child: IconButton(
                         icon: Icon(homeIcon, color: scheme.onSecondary),
                         tooltip: homeTooltip,
-                        onPressed: () => context.goNamed(AppRoutes.home),
+                        onPressed: () {
+                          ref.read(moodSelectProvider.notifier).clear();
+                          ref.read(modeSelectProvider.notifier).clear();
+                          ref.read(areaSelectProvider.notifier).clear();
+                          ref.read(activitySelectProvider.notifier).clear();
+                          context.goNamed(AppRoutes.home);
+                        },
                       ),
                     ),
                   ),
