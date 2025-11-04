@@ -1,33 +1,54 @@
+import 'package:bd_app_v0/src/core/constants/assets.dart';
+import 'package:bd_app_v0/src/core/theme/text_styles.dart';
+import 'package:bd_app_v0/src/shared/widgets/header/header_image.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AreaSelectScreen extends StatelessWidget {
+class AreaSelectScreen extends ConsumerWidget {
   const AreaSelectScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Area Select'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
-        ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.mood, size: 100),
-            const SizedBox(height: 20),
-            Text(
-              'Area Select Screen',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          HeaderImage(
+            assetsPath: AssetsPath.areas,
+            showBack: true,
+            showHome: true,
+          ),
+          Semantics(
+            header: true,
+            label: 'Räume',
+            hint: 'Raum auswählen',
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Text(
+                'Welcher Raum hat Priorität?',
+                style: TextStyles.textTheme.headlineLarge,
+              ),
             ),
-            const SizedBox(height: 10),
-            const Text('Coming soon...'),
-          ],
-        ),
+          ),
+          /* Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 32),
+              itemBuilder: (context, index) {
+                final area = areas[index];
+                return SelectCard(
+                  mode: area,
+                  selected: area.id == selectedId,
+                  onTap: () {
+                    ref.read(areaSelectProvider.notifier).setSelected(area.id);
+                    //context.pushNamed(area.route);
+                  },
+                );
+              },
+              separatorBuilder: (_, _) => const SizedBox.shrink(),
+              itemCount: areas.length,
+            ),
+          ), */
+        ],
       ),
     );
   }
