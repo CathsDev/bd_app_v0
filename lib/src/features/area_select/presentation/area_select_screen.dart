@@ -3,7 +3,7 @@ import 'package:bd_app_v0/src/core/routing/route_names.dart';
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/area_select/models/area_model.dart';
 import 'package:bd_app_v0/src/features/area_select/providers/area_select_provider.dart';
-import 'package:bd_app_v0/src/shared/widgets/cards/area_card.dart';
+import 'package:bd_app_v0/src/shared/widgets/cards/select_card.dart';
 import 'package:bd_app_v0/src/shared/widgets/header/header_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,8 +41,9 @@ class AreaSelectScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 32),
               itemBuilder: (context, index) {
                 final area = areas[index];
-                return AreaCard(
-                  model: area,
+                return SelectCard(
+                  title: area.title,
+                  imagePath: area.imagePath,
                   selected: area.id == selectedId,
                   onTap: () {
                     ref.read(areaSelectProvider.notifier).setSelected(area.id);

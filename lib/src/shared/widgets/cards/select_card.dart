@@ -1,21 +1,29 @@
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
-import 'package:bd_app_v0/src/features/mode_select/models/mode_model.dart';
 import 'package:flutter/material.dart';
 
 class SelectCard extends StatelessWidget {
-  final ModeModel mode;
+  final String title;
+  final String? subtitle;
+  final String imagePath;
   final bool selected;
   final VoidCallback onTap;
+  final double imageWidth;
+  final double imageHeight;
   const SelectCard({
     super.key,
-    required this.mode,
+    required this.title,
+    this.subtitle,
+    required this.imagePath,
     required this.selected,
     required this.onTap,
+    this.imageWidth = 72,
+    this.imageHeight = 72,
   });
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    //return Placeholder();
     return Card(
       margin: EdgeInsets.all(8),
       color: selected ? scheme.secondary : scheme.primary,
@@ -32,9 +40,9 @@ class SelectCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
-                  mode.imagePath,
-                  width: 88,
-                  height: 148,
+                  imagePath,
+                  width: imageWidth,
+                  height: imageHeight,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -43,10 +51,10 @@ class SelectCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(mode.title, style: TextStyles.cardTitle),
-                    if (mode.subtitle != null) const SizedBox(height: 8),
-                    if (mode.subtitle != null)
-                      Text(mode.subtitle!, style: TextStyles.cardSubtitle),
+                    Text(title, style: TextStyles.cardTitle),
+                    if (subtitle != null) const SizedBox(height: 8),
+                    if (subtitle != null)
+                      Text(subtitle!, style: TextStyles.cardSubtitle),
                   ],
                 ),
               ),

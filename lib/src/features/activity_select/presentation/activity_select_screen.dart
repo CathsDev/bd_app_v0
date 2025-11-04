@@ -3,7 +3,7 @@ import 'package:bd_app_v0/src/core/routing/route_names.dart';
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/activity_select/models/activity_model.dart';
 import 'package:bd_app_v0/src/features/activity_select/providers/activity_select_provider.dart';
-import 'package:bd_app_v0/src/shared/widgets/cards/activity_card.dart';
+import 'package:bd_app_v0/src/shared/widgets/cards/select_card.dart';
 import 'package:bd_app_v0/src/shared/widgets/header/header_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,8 +41,9 @@ class ActivitySelectScreen extends ConsumerWidget {
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 32),
               itemBuilder: (context, index) {
                 final activity = activities[index];
-                return ActivityCard(
-                  model: activity,
+                return SelectCard(
+                  title: activity.title,
+                  imagePath: activity.imagePath,
                   selected: activity.id == selectedId,
                   onTap: () {
                     ref

@@ -41,7 +41,11 @@ class ModeSelectScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final mode = modes[index];
                 return SelectCard(
-                  mode: mode,
+                  title: mode.title,
+                  imagePath: mode.imagePath,
+                  imageWidth: 88,
+                  imageHeight: 148,
+                  subtitle: mode.subtitle,
                   selected: mode.id == selectedId,
                   onTap: () {
                     ref.read(modeSelectProvider.notifier).setSelected(mode.id);
