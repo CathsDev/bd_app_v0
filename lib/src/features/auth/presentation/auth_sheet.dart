@@ -78,12 +78,11 @@ class _AuthSheetState extends ConsumerState<AuthSheet> {
               autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Handle
                   Container(
-                    width: 36,
-                    height: 4,
+                    width: 80,
+                    height: 6,
                     margin: const EdgeInsets.only(bottom: 12),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.24),
