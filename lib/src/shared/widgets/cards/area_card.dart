@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/area_select/models/area_model.dart';
 import 'package:flutter/material.dart';
