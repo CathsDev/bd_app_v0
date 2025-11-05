@@ -14,8 +14,8 @@ class MoodSelectScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedMood = ref.watch(moodSelectProvider).selectedId;
-    final canContinue = selectedMood != null;
+    final selectedMoodId = ref.watch(moodSelectProvider).selectedId;
+    final canContinue = selectedMoodId != null;
     final cs = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -55,7 +55,7 @@ class MoodSelectScreen extends ConsumerWidget {
                   for (final mood in moods)
                     MoodTile(
                       mood: mood,
-                      selected: mood.id == selectedMood,
+                      selected: mood.id == selectedMoodId,
                       onTap: () {
                         ref
                             .read(moodSelectProvider.notifier)
@@ -83,7 +83,7 @@ class MoodSelectScreen extends ConsumerWidget {
                       ? () {
                           ref
                               .read(sessionProvider.notifier)
-                              .updateMood(selectedMood);
+                              .updateMood(selectedMoodId);
                           context.pushNamed(AppRoutes.modeSelect);
                         }
                       : null,

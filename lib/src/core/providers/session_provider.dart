@@ -30,7 +30,7 @@ class SessionNotifier extends Notifier<SessionState> {
   }
 
   // Alles zurücksetzen
-  void clear() {
+  void resetSession() {
     state = SessionState.initial();
   }
 }
