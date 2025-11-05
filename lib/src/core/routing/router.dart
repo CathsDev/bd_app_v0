@@ -9,6 +9,7 @@ import 'package:bd_app_v0/src/features/mode_select/presentation/mode_select_scre
 import 'package:bd_app_v0/src/features/mood_select/presentation/mood_select_screen.dart';
 import 'package:bd_app_v0/src/features/settings/presentation/settings_screen.dart';
 import 'package:bd_app_v0/src/features/task_complete/presentation/task_complete_screen.dart';
+import 'package:bd_app_v0/src/features/task_select/presentation/task_select_screen.dart';
 import 'package:bd_app_v0/src/features/task_timer/presentation/task_timer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -105,6 +106,16 @@ final routerProvider = Provider<GoRouter>((ref) {
           child: const ActivitySelectScreen(),
         ),
         //builder: (context, state) => const ActivitySelectScreen(),
+      ),
+      GoRoute(
+        path: '/task-select',
+        name: AppRoutes.taskSelect,
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const TaskSelectScreen(),
+        ),
+        //builder: (context, state) => const TaskTimerScreen(),
       ),
       GoRoute(
         path: '/task-timer',

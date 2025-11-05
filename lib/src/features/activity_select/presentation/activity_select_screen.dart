@@ -53,7 +53,7 @@ class ActivitySelectScreen extends ConsumerWidget {
                     ref
                         .read(sessionProvider.notifier)
                         .updateActivity(activity.id);
-                    context.pushNamed(AppRoutes.taskTimer);
+                    context.pushNamed(AppRoutes.taskSelect);
                   },
                 );
               },

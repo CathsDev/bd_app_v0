@@ -49,7 +49,7 @@ class AreaSelectScreen extends ConsumerWidget {
                   onTap: () {
                     ref.read(areaSelectProvider.notifier).setSelected(area.id);
                     ref.read(sessionProvider.notifier).updateArea(area.id);
-                    context.pushNamed(AppRoutes.taskTimer);
+                    context.pushNamed(AppRoutes.taskSelect);
                   },
                 );
               },

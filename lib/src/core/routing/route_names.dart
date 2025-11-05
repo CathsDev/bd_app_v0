@@ -5,6 +5,7 @@ abstract final class AppRoutes {
   static const modeSelect = 'mode-select';
   static const areaSelect = 'area-select';
   static const activitySelect = 'activity-select';
+  static const taskSelect = 'task-select';
   static const taskTimer = 'task-timer';
   static const taskComplete = 'task-complete';
   static const settings = 'settings';
