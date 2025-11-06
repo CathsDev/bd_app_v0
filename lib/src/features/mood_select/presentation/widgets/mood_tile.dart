@@ -2,7 +2,7 @@ import 'package:bd_app_v0/src/features/mood_select/models/mood_model.dart';
 import 'package:flutter/material.dart';
 
 class MoodTile extends StatefulWidget {
-  final MoodModel mood;
+  final Mood mood;
   final bool selected;
   final VoidCallback onTap;
   final ColorScheme cs;
@@ -34,7 +34,7 @@ class _MoodTileState extends State<MoodTile> {
     return Semantics(
       button: true,
       selected: selected,
-      label: 'Stimmung: ${widget.mood.label}',
+      label: 'Stimmung: ${widget.mood.labelKey}',
       hint: selected ? 'Ausgewählt' : 'Auswählen',
       child: AnimatedScale(
         scale: _pressed ? 0.98 : 1,
@@ -72,7 +72,7 @@ class _MoodTileState extends State<MoodTile> {
                   Icon(widget.mood.icon, size: 36, color: fg),
                   const SizedBox(height: 8),
                   Text(
-                    widget.mood.label,
+                    widget.mood.labelKey,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: fg,

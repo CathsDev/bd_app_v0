@@ -11,7 +11,7 @@ class TaskSelectScreen extends ConsumerWidget {
     final session = ref.watch(sessionProvider);
     final mood = session.mood;
     final mode = session.mode;
-    final room = session.area;
+    final area = session.area;
     final activity = session.activity;
     return Scaffold(
       appBar: AppBar(
@@ -34,7 +34,7 @@ class TaskSelectScreen extends ConsumerWidget {
             const SizedBox(height: 10),
             Text('mood: $mood'),
             Text('mode: $mode'),
-            Text('room: $room'),
+            Text('area: $area'),
             Text('activity: $activity'),
           ],
         ),

@@ -1,54 +1,54 @@
 import 'package:flutter/material.dart';
 
-class MoodModel {
+class Mood {
   final String id;
-  final String label;
-  final int energie;
+  final String labelKey;
+  final int energyLevel;
   final IconData icon;
 
-  const MoodModel({
+  const Mood({
     required this.id,
-    required this.label,
-    required this.energie,
+    required this.labelKey,
+    required this.energyLevel,
     required this.icon,
   });
 }
 
-const moods = <MoodModel>[
-  MoodModel(
+const moods = <Mood>[
+  Mood(
     id: 'emergency',
-    label: 'Notfall',
-    energie: 0,
+    labelKey: 'Notfall',
+    energyLevel: 0,
     icon: Icons.airline_seat_individual_suite_outlined,
   ),
-  MoodModel(
+  Mood(
     id: 'very_bad',
-    label: 'Sehr schlecht',
-    energie: 1,
+    labelKey: 'Sehr schlecht',
+    energyLevel: 1,
     icon: Icons.sentiment_very_dissatisfied_rounded,
   ),
-  MoodModel(
+  Mood(
     id: 'bad',
-    label: 'Schlecht',
-    energie: 2,
+    labelKey: 'Schlecht',
+    energyLevel: 2,
     icon: Icons.sentiment_dissatisfied_rounded,
   ),
-  MoodModel(
+  Mood(
     id: 'neutral',
-    label: 'Geht so',
-    energie: 3,
+    labelKey: 'Geht so',
+    energyLevel: 3,
     icon: Icons.sentiment_neutral_rounded,
   ),
-  MoodModel(
-    id: 'happy',
-    label: 'Gut',
-    energie: 4,
+  Mood(
+    id: 'good',
+    labelKey: 'Gut',
+    energyLevel: 4,
     icon: Icons.sentiment_satisfied_rounded,
   ),
-  MoodModel(
-    id: 'very_happy',
-    label: 'Sehr gut',
-    energie: 5,
+  Mood(
+    id: 'very_good',
+    labelKey: 'Sehr gut',
+    energyLevel: 5,
     icon: Icons.sentiment_very_satisfied_rounded,
   ),
 ];
