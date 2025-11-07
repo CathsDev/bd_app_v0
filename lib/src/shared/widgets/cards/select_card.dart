@@ -23,7 +23,7 @@ class SelectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    //return Placeholder();
+
     return Card(
       margin: EdgeInsets.all(8),
       color: selected ? scheme.secondary : scheme.primary,

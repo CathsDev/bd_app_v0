@@ -1,8 +1,8 @@
 import 'package:bd_app_v0/src/core/constants/assets.dart';
 import 'package:bd_app_v0/src/core/providers/session_provider.dart';
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
+import 'package:bd_app_v0/src/features/task_select/presentation/widgets/task_card.dart';
 import 'package:bd_app_v0/src/features/task_select/providers/task_provider.dart';
-import 'package:bd_app_v0/src/shared/widgets/cards/select_card.dart';
 import 'package:bd_app_v0/src/shared/widgets/header/header_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,11 +54,12 @@ class TaskSelectScreen extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SingleChildScrollView(
-                        child: SelectCard(
-                          title: taskWithVariant.task.title,
-                          imagePath: AssetsPath.areaPlaceholder,
-                          selected: false,
+                        child: TaskCard(
+                          title: taskWithVariant.task.category,
+                          description: taskWithVariant.task.title,
+                          timeTip: '${taskWithVariant.variant.timeMinutes}',
                           onTap: () {},
+                          selected: false,
                         ),
                       ),
                     ],

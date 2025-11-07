@@ -79,4 +79,7 @@ abstract final class TextStyles {
 
   static TextStyle get cardSubtitle =>
       TextStyle(color: ColorPalette.text0, fontSize: 14.0, height: 1.32);
+
+  static TextStyle get cardTaskTimeTip =>
+      TextStyle(color: ColorPalette.text0, fontSize: 12.0);
 }
