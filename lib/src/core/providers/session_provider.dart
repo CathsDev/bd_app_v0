@@ -1,3 +1,4 @@
+import 'package:bd_app_v0/src/features/task_select/providers/task_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SessionState {
@@ -6,6 +7,7 @@ class SessionState {
   final String? area;
   final String? activity;
   final DateTime? startTime;
+  final TaskWithVariant? currentTask;
 
   SessionState({
     this.mood,
@@ -13,6 +15,7 @@ class SessionState {
     this.area,
     this.activity,
     this.startTime,
+    this.currentTask,
   });
 
   factory SessionState.initial() {
@@ -22,6 +25,7 @@ class SessionState {
       area: null,
       activity: null,
       startTime: null,
+      currentTask: null,
     );
   }
 
@@ -31,6 +35,7 @@ class SessionState {
     String? area,
     String? activity,
     DateTime? startTime,
+    TaskWithVariant? currentTask,
   }) {
     return SessionState(
       mood: mood ?? this.mood,
@@ -38,6 +43,7 @@ class SessionState {
       area: area ?? this.area,
       activity: activity ?? this.activity,
       startTime: startTime ?? this.startTime,
+      currentTask: currentTask ?? this.currentTask,
     );
   }
 
@@ -50,6 +56,7 @@ class SessionState {
       startTime: json['startTime'] != null
           ? DateTime.parse(json['startTime'] as String)
           : null,
+      currentTask: json['currentTask'] as TaskWithVariant,
     );
   }
 
@@ -59,6 +66,7 @@ class SessionState {
     'area': area,
     'activity': activity,
     'startTime': startTime?.toIso8601String(),
+    'currentTask': currentTask,
   };
 }
 
@@ -89,9 +97,25 @@ class SessionNotifier extends Notifier<SessionState> {
     state = state.copyWith(activity: activity);
   }
 
+  // CurrentTask setzen
+  void updateCurrentTask(TaskWithVariant task) {
+    state = state.copyWith(currentTask: task);
+  }
+
   // Alles zurücksetzen
   void clear() {
     state = SessionState.initial();
+  }
+
+  void clearCurrentTask() {
+    state = SessionState(
+      mood: state.mood,
+      mode: state.mode,
+      area: state.area,
+      activity: state.activity,
+      startTime: state.startTime,
+      currentTask: null,
+    );
   }
 }
 

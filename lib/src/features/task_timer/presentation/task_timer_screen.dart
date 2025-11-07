@@ -1,11 +1,20 @@
+import 'package:bd_app_v0/src/core/providers/session_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class TaskTimerScreen extends StatelessWidget {
+class TaskTimerScreen extends ConsumerWidget {
   const TaskTimerScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final session = ref.watch(sessionProvider);
+    final mood = session.mood;
+    final mode = session.mode;
+    final area = session.area;
+    final activity = session.activity;
+    final task = session.currentTask;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Task Timer'),
@@ -25,7 +34,11 @@ class TaskTimerScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 10),
-            const Text('Coming soon...'),
+            Text('mood: $mood'),
+            Text('mode: $mode'),
+            Text('area: $area'),
+            Text('activity: $activity'),
+            Text('task: $task'),
           ],
         ),
       ),
