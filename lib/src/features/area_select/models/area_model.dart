@@ -57,7 +57,7 @@ const areas = <AreaModel>[
     imagePath: AssetsPath.areaPlaceholder,
   ),
   AreaModel(
-    id: 'gasts',
+    id: 'guest',
     title: 'Gästezimmer',
     imagePath: AssetsPath.areaPlaceholder,
   ),

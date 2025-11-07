@@ -1,5 +1,5 @@
 abstract final class AssetsPath {
-  static const defaultImageAsset = 'assets/images/header/default.png';
+  static const defaultImage = 'assets/images/header/default_image.png';
   static const areas = 'assets/images/header/areas.png';
   static const cleaning = 'assets/images/header/cleaning.png';
   static const emergency = 'assets/images/header/emergency.png';

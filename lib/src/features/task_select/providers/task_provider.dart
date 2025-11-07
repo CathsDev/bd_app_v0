@@ -39,16 +39,18 @@ class TaskService {
     // Tasks filtern
     List<Task> filteredTasks;
 
-    if (session.area != null) {
+    if (session.mode == 'area') {
       // User hat AREA gewählt → Filter nach relatedAreas
       filteredTasks = tasks.where((task) {
         return task.relatedAreas.contains(session.area);
       }).toList();
-    } else {
+    } else if (session.mode == 'activity') {
       // User hat ACTIVITY gewählt → Filter nach relatedActivities
       filteredTasks = tasks.where((task) {
         return task.relatedActivities.contains(session.activity);
       }).toList();
+    } else {
+      filteredTasks = [];
     }
 
     // Für jeden Task die passende Variant finden
@@ -68,39 +70,7 @@ class TaskService {
         .whereType<TaskWithVariant>()
         .toList(); // Filter null values raus
 
-    // Gruppiere nach Kategorie und wähle je 1 aus
-    final result = <TaskWithVariant>[];
-
-    // 1x Cleaning Task
-    try {
-      final cleaningTask = tasksWithVariants.firstWhere(
-        (t) => t.task.category == TaskCategories.cleaning,
-      );
-      result.add(cleaningTask);
-    } catch (e) {
-      // Keine cleaning task gefunden - okay, weiter
-    }
-
-    // 1x Organizing Task
-    try {
-      final organizingTask = tasksWithVariants.firstWhere(
-        (t) => t.task.category == TaskCategories.organize,
-      );
-      result.add(organizingTask);
-    } catch (e) {
-      // Keine organizing task gefunden - okay, weiter
-    }
-
-    // 1x Declutter Task
-    try {
-      final declutterTask = tasksWithVariants.firstWhere(
-        (t) => t.task.category == TaskCategories.declutter,
-      );
-      result.add(declutterTask);
-    } catch (e) {
-      // Keine declutter task gefunden - okay, weiter
-    }
-
-    return result;
+    // Nimm einfach bis zu 3 Tasks (Quick Fix für MVP)
+    return tasksWithVariants.take(3).toList();
   }
 }
