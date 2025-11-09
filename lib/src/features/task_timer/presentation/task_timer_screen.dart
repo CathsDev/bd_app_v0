@@ -1,4 +1,5 @@
 import 'package:bd_app_v0/src/core/providers/session_provider.dart';
+import 'package:bd_app_v0/src/features/task_timer/presentation/providers/task_timer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +14,12 @@ class TaskTimerScreen extends ConsumerWidget {
     final mode = session.mode;
     final area = session.area;
     final activity = session.activity;
-    final task = session.currentTask;
+    final currentTask = session.currentTask;
+    final timer = ref.watch(taskTimerProvider);
+
+    if (currentTask == null) {
+      return Text('Kein Task ausgewählt!');
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +44,8 @@ class TaskTimerScreen extends ConsumerWidget {
             Text('mode: $mode'),
             Text('area: $area'),
             Text('activity: $activity'),
-            Text('task: $task'),
+            Text('currentTask: ${currentTask.task.title}'),
+            Text('currentTask: ${timer.totalDuration}'),
           ],
         ),
       ),
