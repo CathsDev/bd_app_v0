@@ -82,4 +82,10 @@ abstract final class TextStyles {
 
   static TextStyle get cardTaskTimeTip =>
       TextStyle(color: ColorPalette.text0, fontSize: 12.0);
+
+  static TextStyle get timeText => TextStyle(
+    color: ColorPalette.text0,
+    fontSize: 80.0,
+    fontWeight: FontWeight.w600,
+  );
 }

@@ -2,7 +2,7 @@
 // running: Tickt, Button = Pause
 // paused: Runterzählen pausiert, Button = Play
 // finished: Zeit abgelaufen, Button = Fertig (alert)
-import 'package:bd_app_v0/src/features/task_timer/presentation/providers/task_timer_provider.dart';
+import 'package:bd_app_v0/src/features/task_timer/providers/task_timer_provider.dart';
 
 class TaskTimerService {
   const TaskTimerService();
