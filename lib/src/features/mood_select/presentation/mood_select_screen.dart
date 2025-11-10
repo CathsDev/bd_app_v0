@@ -50,7 +50,7 @@ class MoodSelectScreen extends ConsumerWidget {
                 crossAxisCount: 3,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.95, // leicht höher als breit
+                childAspectRatio: 0.95,
                 children: [
                   for (final mood in moods)
                     MoodTile(
@@ -68,6 +68,7 @@ class MoodSelectScreen extends ConsumerWidget {
             ),
           ),
           SafeArea(
+            top: false,
             child: Visibility(
               visible: true,
               maintainSize: true,

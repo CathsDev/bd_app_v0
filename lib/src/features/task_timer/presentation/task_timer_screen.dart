@@ -14,9 +14,13 @@ class TaskTimerScreen extends ConsumerWidget {
     final currentTask = session.currentTask;
     final timer = ref.watch(taskTimerProvider);
 
+    final play = timer.isIdle || timer.isPaused || timer.isFinished;
+
     if (currentTask == null) {
       return Text('Kein Task ausgewählt!');
     }
+
+    final description = currentTask.variant.description;
 
     return Scaffold(
       body: Column(
@@ -30,13 +34,33 @@ class TaskTimerScreen extends ConsumerWidget {
               style: TextStyles.textTheme.headlineLarge,
             ),
           ),
-          const SizedBox(height: 10),
-
-          Text('currentTask: ${currentTask.task.variants}'),
-          Text('currentTask: ${timer.totalDuration}'),
-          FilledButton(
-            onPressed: () {},
-            child: Icon(Icons.play_arrow_outlined),
+          const SizedBox(height: 16),
+          Expanded(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(description),
+              ),
+            ),
+          ),
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+              child: Center(
+                child: SizedBox(
+                  height: 80,
+                  width: 220,
+                  child: FilledButton(
+                    onPressed: () {
+                      ref.read(taskTimerProvider.notifier).togglePlayPause();
+                    },
+                    child: Icon(play ? Icons.play_arrow : Icons.pause),
+                  ),
+                ),
+              ),
+            ),
           ),
         ],
       ),
