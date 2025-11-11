@@ -58,7 +58,7 @@ const tasks = <Task>[
       TaskVariant(
         energyLevel: 1,
         description: 'Schnell die Kloschüssel mit Bürste durchgehen',
-        timeMinutes: 3,
+        timeMinutes: 1,
       ),
       TaskVariant(
         energyLevel: 2,
