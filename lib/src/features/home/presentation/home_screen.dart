@@ -16,6 +16,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Todo:
     /* final authUser = ref.watch(currentUserProvider);
     final String userLabel = (authUser?.email?.trim().isNotEmpty ?? false)
         ? authUser!.email!.trim()
@@ -110,28 +111,33 @@ class HomeScreen extends ConsumerWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    children: [
-                      HomeCard(
-                        title: 'Profil',
-                        subtitle: 'Settings für test@test.de',
-                        onTap: () => context.pushNamed(AppRoutes.settings),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          HomeCard(
+                            title: 'Profil',
+                            subtitle: 'Settings für test@test.de',
+                            onTap: () => context.pushNamed(AppRoutes.settings),
+                          ),
+                          const SizedBox(height: 12),
+                          HomeCard(
+                            title: 'Weiter machen',
+                            subtitle: 'Derzeit nicht verfügbar',
+                            enabled: false,
+                          ),
+                          const SizedBox(height: 12),
+                          HomeCard(
+                            title: 'Los geht\'s',
+                            subtitle: 'Lass uns starten',
+                            onTap: () =>
+                                context.pushNamed(AppRoutes.moodSelect),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 12),
-                      HomeCard(
-                        title: 'Weiter machen',
-                        subtitle: 'Derzeit nicht verfügbar',
-                        enabled: false,
-                      ),
-                      const SizedBox(height: 12),
-                      HomeCard(
-                        title: 'Los geht\'s',
-                        subtitle: 'Lass uns starten',
-                        onTap: () => context.pushNamed(AppRoutes.moodSelect),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
