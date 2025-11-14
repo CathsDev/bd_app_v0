@@ -22,7 +22,7 @@ class _AuthSheetState extends ConsumerState<AuthSheet> {
 
   @override
   void dispose() {
-    ref.read(authNotifierProvider.notifier).reset();
+    //ref.read(authNotifierProvider.notifier).reset();
     _emailCtrl.dispose();
     _pwCtrl.dispose();
     _pw2Ctrl.dispose();
