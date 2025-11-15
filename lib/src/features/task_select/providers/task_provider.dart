@@ -10,7 +10,7 @@ final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
   /// Session (mood + area/activity)
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  final session = ref.read(sessionProvider);
+  final session = ref.watch(sessionProvider);
   final moodId = session.mood;
 
   // Mood Check

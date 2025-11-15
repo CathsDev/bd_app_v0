@@ -146,7 +146,7 @@ class TaskTimerScreen extends ConsumerWidget {
                                     );
                                     debugPrint('Saved: $completedTasks');
                                     if (!context.mounted) return;
-                                    context.pushNamed(AppRoutes.moodSelect);
+                                    context.goNamed(AppRoutes.moodSelect);
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
