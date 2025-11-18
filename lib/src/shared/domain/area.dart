@@ -103,5 +103,5 @@ const areas = <Area>[
     imageKey: 'playroom',
   ),
   Area(id: 'storage', name: 'Abstellraum', isActive: true, imageKey: 'storage'),
-  Area(id: 'terrasse', name: 'Terrasse', isActive: true, imageKey: 'terrasse'),
+  Area(id: 'terrace', name: 'Terrasse', isActive: true, imageKey: 'terrace'),
 ];

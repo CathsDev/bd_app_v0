@@ -947,7 +947,7 @@ const tasks = <Task>[
     id: "balcony_clean_floor",
     title: "Balkon fegen",
     category: TaskCategories.cleaning,
-    relatedAreas: ["balcony", "terrasse"],
+    relatedAreas: ["balcony", "terrace"],
     relatedActivities: ["cleaning", "sweeping"],
     cooldownDays: 14,
     variants: [
@@ -986,7 +986,7 @@ const tasks = <Task>[
     id: "balcony_organize_furniture",
     title: "Balkonmöbel arrangieren",
     category: TaskCategories.organize,
-    relatedAreas: ["balcony", "terrasse"],
+    relatedAreas: ["balcony", "terrace"],
     relatedActivities: ["organizing"],
     cooldownDays: 30,
     variants: [
@@ -1025,7 +1025,7 @@ const tasks = <Task>[
     id: "balcony_declutter_items",
     title: "Balkon ausmisten",
     category: TaskCategories.declutter,
-    relatedAreas: ["balcony", "terrasse"],
+    relatedAreas: ["balcony", "terrace"],
     relatedActivities: ["decluttering"],
     cooldownDays: 90,
     variants: [
