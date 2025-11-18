@@ -1,4 +1,4 @@
-import 'package:bd_app_v0/src/core/theme/text_styles.dart';
+import 'package:bd_app_v0/src/app/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SelectCard extends StatelessWidget {

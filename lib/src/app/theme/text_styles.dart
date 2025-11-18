@@ -1,0 +1,91 @@
+import 'package:bd_app_v0/src/app/theme/color_palette.dart';
+import 'package:flutter/material.dart';
+
+abstract final class TextStyles {
+  static const textTheme = TextTheme(
+    // Headlines
+    headlineLarge: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 32.0,
+      fontWeight: FontWeight.w400,
+      height: 1.25,
+    ),
+    headlineMedium: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 24.0,
+      fontWeight: FontWeight.w600,
+      height: 1.25,
+    ),
+    headlineSmall: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 20.0,
+      fontWeight: FontWeight.w600,
+      height: 1.25,
+    ),
+    // Body
+    bodyLarge: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 16.0,
+      fontWeight: FontWeight.w400,
+      height: 1.45,
+    ),
+    bodyMedium: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 14.0,
+      fontWeight: FontWeight.w400,
+      height: 1.45,
+    ),
+    bodySmall: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
+      height: 1.40,
+    ),
+    // Labels / Buttons
+    labelLarge: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 16.0,
+      fontWeight: FontWeight.w600,
+      height: 1.20,
+      letterSpacing: 0.1,
+    ),
+    labelMedium: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 14.0,
+      fontWeight: FontWeight.w600,
+      height: 1.20,
+      letterSpacing: 0.1,
+    ),
+    labelSmall: TextStyle(
+      color: ColorPalette.text0,
+      fontSize: 12.0,
+      fontWeight: FontWeight.w600,
+      height: 1.15,
+      letterSpacing: 0.1,
+    ),
+  );
+
+  static TextStyle get appTitle => TextStyle(
+    color: ColorPalette.text0,
+    fontSize: 48.0,
+    fontWeight: FontWeight.w500,
+  );
+
+  static TextStyle get cardTitle => TextStyle(
+    color: ColorPalette.text0,
+    fontSize: 22.0,
+    fontWeight: FontWeight.w400,
+  );
+
+  static TextStyle get cardSubtitle =>
+      TextStyle(color: ColorPalette.text0, fontSize: 14.0, height: 1.32);
+
+  static TextStyle get cardTaskTimeTip =>
+      TextStyle(color: ColorPalette.text0, fontSize: 12.0);
+
+  static TextStyle get timeText => TextStyle(
+    color: ColorPalette.text0,
+    fontSize: 80.0,
+    fontWeight: FontWeight.w600,
+  );
+}

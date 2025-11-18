@@ -1,4 +1,4 @@
-import 'package:bd_app_v0/src/core/theme/color_palette.dart';
+import 'package:bd_app_v0/src/app/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 
 class HomeCard extends StatelessWidget {

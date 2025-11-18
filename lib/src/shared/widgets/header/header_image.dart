@@ -1,8 +1,8 @@
-import 'package:bd_app_v0/src/core/routing/route_names.dart';
-import 'package:bd_app_v0/src/features/activity_select/providers/activity_select_provider.dart';
-import 'package:bd_app_v0/src/features/area_select/providers/area_select_provider.dart';
-import 'package:bd_app_v0/src/features/mode_select/providers/mode_select_provider.dart';
-import 'package:bd_app_v0/src/features/mood_select/providers/mood_select_provider.dart';
+import 'package:bd_app_v0/src/app/app_routes.dart';
+import 'package:bd_app_v0/src/features/activity_select/state/activity_select_provider.dart';
+import 'package:bd_app_v0/src/features/area_select/state/area_select_provider.dart';
+import 'package:bd_app_v0/src/features/mode_select/state/mode_select_provider.dart';
+import 'package:bd_app_v0/src/features/mood_select/state/mood_select_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

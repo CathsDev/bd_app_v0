@@ -1,5 +1,5 @@
 import 'package:bd_app_v0/firebase_options.dart';
-import 'package:bd_app_v0/src/core/theme/app.dart';
+import 'package:bd_app_v0/src/app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
