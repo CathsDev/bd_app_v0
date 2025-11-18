@@ -36,22 +36,13 @@ class Task {
   });
 }
 
-// ========================================
-// AREA IDs KORRIGIERT:
-// ✅ living (nicht living_room)
-// ✅ kids (nicht kids_room)
-// ✅ bedroom, kitchen, bath, office, hallway
-// ✅ guest (nicht guest_room), guest_bath (nicht guest_bathroom)
-// ✅ storage, laundry, balcony
-// ========================================
-
 const tasks = <Task>[
   // === BATHROOM ===
   Task(
     id: "bathroom_toilet_cleaning",
     title: "Toilette reinigen",
     category: TaskCategories.cleaning,
-    relatedAreas: ["bath", "guest_bath"],
+    relatedAreas: ["bath", "guestbath"],
     relatedActivities: ["cleaning"],
     cooldownDays: 7,
     variants: [
@@ -91,7 +82,7 @@ const tasks = <Task>[
     id: "bathroom_organize_cabinet",
     title: "Badezimmerschrank aufräumen",
     category: TaskCategories.organize,
-    relatedAreas: ["bath"],
+    relatedAreas: ["bath", "guestbath"],
     relatedActivities: ["organizing"],
     cooldownDays: 14,
     variants: [
@@ -130,7 +121,7 @@ const tasks = <Task>[
     id: "bathroom_declutter_products",
     title: "Alte Produkte aussortieren",
     category: TaskCategories.declutter,
-    relatedAreas: ["bath"],
+    relatedAreas: ["bath", "guestbath"],
     relatedActivities: ["decluttering"],
     cooldownDays: 30,
     variants: [
@@ -525,7 +516,7 @@ const tasks = <Task>[
     id: "kids_room_clean_surfaces",
     title: "Kinderzimmer abwischen",
     category: TaskCategories.cleaning,
-    relatedAreas: ["kids"],
+    relatedAreas: ["kidsroom"],
     relatedActivities: ["cleaning", "wiping"],
     cooldownDays: 7,
     variants: [
@@ -564,7 +555,7 @@ const tasks = <Task>[
     id: "kids_room_toys",
     title: "Spielzeug aufräumen",
     category: TaskCategories.organize,
-    relatedAreas: ["kids"],
+    relatedAreas: ["kidsroom"],
     relatedActivities: ["organizing", "tidying"],
     cooldownDays: 1,
     variants: [
@@ -603,7 +594,7 @@ const tasks = <Task>[
     id: "kids_room_declutter_toys",
     title: "Kaputtes Spielzeug aussortieren",
     category: TaskCategories.declutter,
-    relatedAreas: ["kids"],
+    relatedAreas: ["kidsroom"],
     relatedActivities: ["decluttering"],
     cooldownDays: 60,
     variants: [
@@ -956,7 +947,7 @@ const tasks = <Task>[
     id: "balcony_clean_floor",
     title: "Balkon fegen",
     category: TaskCategories.cleaning,
-    relatedAreas: ["balcony"],
+    relatedAreas: ["balcony", "terrasse"],
     relatedActivities: ["cleaning", "sweeping"],
     cooldownDays: 14,
     variants: [
@@ -995,7 +986,7 @@ const tasks = <Task>[
     id: "balcony_organize_furniture",
     title: "Balkonmöbel arrangieren",
     category: TaskCategories.organize,
-    relatedAreas: ["balcony"],
+    relatedAreas: ["balcony", "terrasse"],
     relatedActivities: ["organizing"],
     cooldownDays: 30,
     variants: [
@@ -1034,7 +1025,7 @@ const tasks = <Task>[
     id: "balcony_declutter_items",
     title: "Balkon ausmisten",
     category: TaskCategories.declutter,
-    relatedAreas: ["balcony"],
+    relatedAreas: ["balcony", "terrasse"],
     relatedActivities: ["decluttering"],
     cooldownDays: 90,
     variants: [
@@ -1113,7 +1104,7 @@ const tasks = <Task>[
     id: "general_trash_disposal",
     title: "Müll entsorgen",
     category: TaskCategories.declutter,
-    relatedAreas: ["kitchen", "bath", "bedroom", "office"],
+    relatedAreas: ["kitchen", "bath", "bedroom", "office", "guestbath"],
     relatedActivities: ["decluttering", "disposing"],
     cooldownDays: 3,
     variants: [
@@ -1152,7 +1143,7 @@ const tasks = <Task>[
     id: "general_laundry",
     title: "Wäsche waschen",
     category: TaskCategories.cleaning,
-    relatedAreas: ["bath", "bedroom", "laundry"],
+    relatedAreas: ["bath", "guestbath", "bedroom", "laundry"],
     relatedActivities: ["washing", "laundry"],
     cooldownDays: 2,
     variants: [
@@ -1191,7 +1182,7 @@ const tasks = <Task>[
     id: "general_floor_mopping",
     title: "Boden wischen",
     category: TaskCategories.cleaning,
-    relatedAreas: ["kitchen", "bath", "hallway"],
+    relatedAreas: ["kitchen", "bath", "guestbath", "hallway"],
     relatedActivities: ["mopping", "cleaning"],
     cooldownDays: 7,
     variants: [

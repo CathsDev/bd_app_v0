@@ -118,8 +118,8 @@ class HomeScreen extends ConsumerWidget {
                       child: Column(
                         children: [
                           HomeCard(
-                            title: 'Profil',
-                            subtitle: 'Settings für test@test.de',
+                            title: 'Settings',
+                            subtitle: 'Settings für ...',
                             onTap: () => context.pushNamed(AppRoutes.settings),
                           ),
                           const SizedBox(height: 12),

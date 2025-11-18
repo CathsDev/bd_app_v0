@@ -2,8 +2,8 @@ import 'package:bd_app_v0/src/core/constants/assets.dart';
 import 'package:bd_app_v0/src/core/providers/session_provider.dart';
 import 'package:bd_app_v0/src/core/routing/route_names.dart';
 import 'package:bd_app_v0/src/core/theme/text_styles.dart';
-import 'package:bd_app_v0/src/features/area_select/models/area_model.dart';
 import 'package:bd_app_v0/src/features/area_select/providers/area_select_provider.dart';
+import 'package:bd_app_v0/src/shared/domain/area.dart';
 import 'package:bd_app_v0/src/shared/widgets/cards/select_card.dart';
 import 'package:bd_app_v0/src/shared/widgets/header/header_image.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class AreaSelectScreen extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final area = areas[index];
                 return SelectCard(
-                  title: area.title,
+                  title: area.name,
                   imagePath: area.imagePath,
                   selected: area.id == selectedId,
                   onTap: () {
