@@ -7,7 +7,7 @@ abstract class AreasRepository {
 
   Future<Area> getAreaById(String id);
 
-  Future<void> addArea(String name);
+  // Future<void> addArea(String name); // später für Admin
 
   Future<void> setAreaStatus(String id, bool isActive);
 }
