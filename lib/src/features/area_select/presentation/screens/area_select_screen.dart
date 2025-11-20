@@ -62,3 +62,49 @@ class AreaSelectScreen extends ConsumerWidget {
     );
   }
 }
+
+const areas = <Area>[
+  Area(id: 'balcony', name: 'Balkon', isActive: true, imageKey: 'balcony'),
+  Area(id: 'basement', name: 'Keller', isActive: true, imageKey: 'basement'),
+  Area(id: 'bath', name: 'Badezimmer', isActive: true, imageKey: 'bath'),
+  Area(
+    id: 'bedroom',
+    name: 'Schlafzimmer',
+    isActive: true,
+    imageKey: 'bedroom',
+  ),
+  Area(id: 'garage', name: 'Garage', isActive: true, imageKey: 'garage'),
+  Area(id: 'garden', name: 'Garten', isActive: true, imageKey: 'garden'),
+
+  Area(
+    id: 'guestbath',
+    name: 'Gästebad',
+    isActive: true,
+    imageKey: 'guestbath',
+  ),
+  Area(
+    id: 'guestroom',
+    name: 'Gästezimmer',
+    isActive: true,
+    imageKey: 'guestroom',
+  ),
+  Area(id: 'hallway', name: 'Flur', isActive: true, imageKey: 'hallway'),
+  Area(
+    id: 'kidsroom',
+    name: 'Kinderzimmer',
+    isActive: true,
+    imageKey: 'kidsroom',
+  ),
+  Area(id: 'kitchen', name: 'Küche', isActive: true, imageKey: 'kitchen'),
+  Area(id: 'laundry', name: 'Waschküche', isActive: true, imageKey: 'laundry'),
+  Area(id: 'living', name: 'Wohnzimmer', isActive: true, imageKey: 'living'),
+  Area(id: 'office', name: 'Büro', isActive: true, imageKey: 'office'),
+  Area(
+    id: 'playroom',
+    name: 'Spielzimmer',
+    isActive: true,
+    imageKey: 'playroom',
+  ),
+  Area(id: 'storage', name: 'Abstellraum', isActive: true, imageKey: 'storage'),
+  Area(id: 'terrace', name: 'Terrasse', isActive: true, imageKey: 'terrace'),
+];
