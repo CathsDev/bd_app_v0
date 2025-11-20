@@ -26,6 +26,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/data/
     - assets/images/areas/
     - assets/images/cards/
     - assets/images/header/

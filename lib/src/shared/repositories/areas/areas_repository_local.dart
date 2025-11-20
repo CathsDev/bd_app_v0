@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:bd_app_v0/src/shared/domain/area.dart';
-import 'package:bd_app_v0/src/shared/repositories/areas_repository.dart';
+import 'package:bd_app_v0/src/shared/repositories/areas/areas_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AreasRepositoryLocal implements AreasRepository {

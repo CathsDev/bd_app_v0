@@ -1,0 +1,105 @@
+[
+    {
+      "id": "balcony",
+      "name": "Balkon",
+      "imageKey": "balcony",
+      "isActive": true
+    },
+    {
+      "id": "basement",
+      "name": "Keller",
+      "imageKey": "basement",
+      "isActive": true
+    },
+    {
+      "id": "bath",
+      "name": "Badezimmer",
+      "imageKey": "bath",
+      "isActive": true
+    },
+    {
+      "id": "bedroom",
+      "name": "Schlafzimmer",
+      "imageKey": "bedroom",
+      "isActive": true
+    },
+    {
+      "id": "garage",
+      "name": "Garage",
+      "imageKey": "garage",
+      "isActive": true
+    },
+    {
+      "id": "garden",
+      "name": "Garten",
+      "imageKey": "garden",
+      "isActive": true
+    },
+    {
+      "id": "guestbath",
+      "name": "Gästebad",
+      "imageKey": "guestbath",
+      "isActive": true
+    },
+    {
+      "id": "guestroom",
+      "name": "Gästezimmer",
+      "imageKey": "guestroom",
+      "isActive": true
+    },
+    {
+      "id": "hallway",
+      "name": "Flur",
+      "imageKey": "hallway",
+      "isActive": true
+    },
+    {
+      "id": "kidsroom",
+      "name": "Kinderzimmer",
+      "imageKey": "kidsroom",
+      "isActive": true
+    },
+    {
+      "id": "kitchen",
+      "name": "Küche",
+      "imageKey": "kitchen",
+      "isActive": true
+    },
+    {
+      "id": "laundry",
+      "name": "Waschküche",
+      "imageKey": "laundry",
+      "isActive": true
+    },
+    {
+      "id": "living",
+      "name": "Wohnzimmer",
+      "imageKey": "living",
+      "isActive": true
+    },
+    
+    {
+      "id": "office",
+      "name": "Büro",
+      "imageKey": "office",
+      "isActive": true
+    },
+    {
+      "id": "playroom",
+      "name": "Spielzimmer",
+      "imageKey": "playroom",
+      "isActive": true
+    },
+    {
+      "id": "storage",
+      "name": "Abstellraum",
+      "imageKey": "storage",
+      "isActive": true
+    },
+    {
+      "id": "terrace",
+      "name": "Terrasse",
+      "imageKey": "terrace",
+      "isActive": true
+    }    
+  ]
