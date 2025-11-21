@@ -14,12 +14,18 @@ class AreasRepositoryLocal implements AreasRepository {
 
   Future<List<Area>> _loadAreas() async {
     final areaList = _preferences.getStringList(_kAreasKey) ?? const <String>[];
-    return areaList
+    final areas = areaList
         .map(
           (jsonString) =>
               Area.fromJson(jsonDecode(jsonString) as Map<String, dynamic>),
         )
         .toList(growable: true);
+
+    if (areas.isEmpty) {
+      throw Exception('No areas found in local storage.');
+    }
+
+    return areas;
   }
 
   Future<void> _saveAreas(List<Area> areas) async {
@@ -50,10 +56,22 @@ class AreasRepositoryLocal implements AreasRepository {
   Future<void> setAreaStatus(String id, bool isActive) async {
     final allAreas = await _loadAreas();
     final index = allAreas.indexWhere((area) => area.id == id);
+
     if (index < 0) throw Exception('Area not found');
+
     if (allAreas[index].isActive == isActive) return;
+
+    if (isActive == false) {
+      final allAreasLength = allAreas.where((area) => area.isActive).length;
+      if (allAreasLength == 1) {
+        throw Exception('Mindestens ein Raum muss aktiv bleiben');
+      }
+    }
+
     final currentArea = allAreas[index];
+
     allAreas[index] = currentArea.copyWith(isActive: isActive);
+
     await _saveAreas(allAreas);
   }
 }
