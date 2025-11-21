@@ -24,13 +24,14 @@ class AreasService {
 
   Future<void> initializeUserAreas(SharedPreferences prefs) async {
     final kUserAreas = 'user_areas';
-    final localUserAreas = prefs.getString(kUserAreas);
+    final localUserAreas = prefs.getStringList(kUserAreas);
     if (localUserAreas != null) return;
     try {
-      final userAreasList = await loadAreaCatalog();
-      final userAreas = userAreasList.map((area) => area.toJson()).toList();
-      final userAreasString = jsonEncode(userAreas);
-      prefs.setString(kUserAreas, userAreasString);
+      final userAreas = await loadAreaCatalog();
+      final userAreasList = userAreas.map((area) {
+        return jsonEncode(area.toJson());
+      }).toList();
+      prefs.setStringList(kUserAreas, userAreasList);
     } catch (e) {
       throw Exception('Failed to initialize areas: $e');
     }
