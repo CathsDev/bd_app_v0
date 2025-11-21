@@ -15,7 +15,7 @@ class Area {
 
   String get imagePath {
     if (imageKey == 'placeholder' || imageKey.isEmpty) {
-      return 'assets/images/areas/default_area.png';
+      return 'assets/images/areas/placeholder_areas.png';
     }
     return 'assets/images/areas/$imageKey.png';
   }
