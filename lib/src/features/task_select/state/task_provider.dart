@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bd_app_v0/src/shared/providers/session_provider.dart';
 import 'package:bd_app_v0/src/features/mood_select/domain/mood.dart';
 import 'package:bd_app_v0/src/features/task_select/domain/task.dart';
+import 'package:bd_app_v0/src/shared/state/areas/areas_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,9 @@ final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
 
   final session = ref.watch(sessionProvider);
   final moodId = session.mood;
+
+  final activeAreas = await ref.watch(allActiveUserAreasProvider.future);
+  final activeAreasIds = activeAreas.map((area) => area.id).toList();
 
   // Mood Check
   if (moodId == null) {
@@ -33,6 +37,9 @@ final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
     // Filter relatedAreas
     filteredTasks = tasks.where((task) {
       return task.relatedAreas.contains(session.area);
+    }).toList();
+    filteredTasks = filteredTasks.where((task) {
+      return task.relatedAreas.any((areaId) => activeAreasIds.contains(areaId));
     }).toList();
   } else if (session.mode == 'activity') {
     // Filter relatedActivities
