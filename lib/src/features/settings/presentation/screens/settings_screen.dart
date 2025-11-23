@@ -176,8 +176,7 @@ class SettingsScreen extends StatelessWidget {
                                   title: Text('Räume'),
                                   trailing: Icon(Icons.chevron_right),
                                   onTap: () =>
-                                      //context.pushNamed(AppRoutes.areas),
-                                      context.push('/settings/areas'),
+                                      context.pushNamed(AppRoutes.areas),
                                 ),
                                 Divider(height: 1),
                                 ListTile(

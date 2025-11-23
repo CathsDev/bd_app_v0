@@ -8,6 +8,7 @@ import 'package:bd_app_v0/src/features/home/presentation/screens/home_screen.dar
 import 'package:bd_app_v0/src/features/mode_select/presentation/screens/mode_select_screen.dart';
 import 'package:bd_app_v0/src/features/mood_select/presentation/screens/mood_select_screen.dart';
 import 'package:bd_app_v0/src/features/settings/presentation/screens/account_data_screen.dart';
+import 'package:bd_app_v0/src/features/settings/presentation/screens/areas_settings_screen.dart';
 import 'package:bd_app_v0/src/features/settings/presentation/screens/settings_screen.dart';
 import 'package:bd_app_v0/src/features/task_complete/presentation/screens/task_complete_screen.dart';
 import 'package:bd_app_v0/src/features/task_select/presentation/screens/task_select_screen.dart';
@@ -155,6 +156,16 @@ final routerProvider = Provider<GoRouter>((ref) {
           key: state.pageKey,
           allowSnapshotting: false,
           child: const AccountDataScreen(),
+        ),
+        //builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: '/settings/areas',
+        name: AppRoutes.areas,
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: state.pageKey,
+          allowSnapshotting: false,
+          child: const AreasSettingsScreen(),
         ),
         //builder: (context, state) => const SettingsScreen(),
       ),
