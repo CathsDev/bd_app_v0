@@ -23,7 +23,7 @@ const modes = <Mode>[
     title: 'Tätigkeit',
     subtitle:
         'Wähle eine Tätigkeit aus, die jetzt im Moment für dich die höchste Priorität hat. Zum Beispiel: Wäsche waschen!',
-    imagePath: AssetsPath.activity,
+    imagePath: AssetsPath.taskCard,
     route: AppRoutes.activitySelect,
   ),
   Mode(
@@ -31,7 +31,7 @@ const modes = <Mode>[
     title: 'Raum',
     subtitle:
         'Wähle den Raum aus, der jetzt im Moment für dich die höchste Priorität hat. Zum Beispiel: Wohnzimmer!',
-    imagePath: AssetsPath.area,
+    imagePath: AssetsPath.areaCard,
     route: AppRoutes.areaSelect,
   ),
 ];

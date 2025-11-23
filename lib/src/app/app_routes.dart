@@ -9,6 +9,14 @@ abstract final class AppRoutes {
   static const taskTimer = 'task-timer';
   static const taskComplete = 'task-complete';
   static const settings = 'settings';
+  static const account = 'settings/account';
+  static const activities = 'settings/activities';
+  static const app = 'settings/app';
+  static const design = 'settings/appearance';
+  static const areas = 'settings/areas';
+  static const data = 'settings/data';
+  static const privacy = 'settings/privacy';
+  static const imprint = 'settings/imprint';
   static const login = 'login';
   static const emergency = 'emergency';
 }

@@ -21,7 +21,7 @@ class ActivitySelectScreen extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           HeaderImage(
-            assetsPath: AssetsPath.activity,
+            assetsPath: AssetsPath.taskCard,
             showBack: true,
             showHome: true,
           ),
