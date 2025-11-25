@@ -17,6 +17,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final screenHeight = MediaQuery.of(context).size.height;
     final headerHeight = screenHeight * 0.39;
+
     return Scaffold(
       extendBody: true,
       body: Stack(

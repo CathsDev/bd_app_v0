@@ -52,9 +52,12 @@ class SettingsScreen extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 8, left: 12),
+                            padding: const EdgeInsetsDirectional.only(
+                              top: 8,
+                              start: 12,
+                            ),
                             child: Material(
-                              color: ColorPalette.burgundy2,
+                              color: scheme.secondary,
                               shape: const CircleBorder(),
                               clipBehavior: Clip.antiAlias,
                               child: Semantics(
@@ -82,9 +85,12 @@ class SettingsScreen extends ConsumerWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 8, right: 12),
+                            padding: const EdgeInsetsDirectional.only(
+                              top: 8,
+                              end: 12,
+                            ),
                             child: Material(
-                              color: ColorPalette.burgundy2,
+                              color: scheme.secondary,
                               shape: const CircleBorder(),
                               clipBehavior: Clip.antiAlias,
                               child: Semantics(
