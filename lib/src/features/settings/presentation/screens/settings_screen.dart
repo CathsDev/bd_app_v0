@@ -3,45 +3,44 @@ import 'dart:ui';
 import 'package:bd_app_v0/src/app/app_routes.dart';
 import 'package:bd_app_v0/src/app/theme/color_palette.dart';
 import 'package:bd_app_v0/src/app/theme/text_styles.dart';
+import 'package:bd_app_v0/src/features/settings/presentation/widgets/settings_card.dart';
 import 'package:bd_app_v0/src/shared/constants/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final headerHeight = (screenHeight * 0.39) / 1.5;
+    final headerHeight = screenHeight * 0.39;
     final scheme = Theme.of(context).colorScheme;
     return Scaffold(
-      /* appBar: AppBar(
-        title: const Text('Einstellungen'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
-        ),
-      ), */
       extendBody: true,
       body: Stack(
         fit: StackFit.expand,
         children: [
+          // Hintergrundbild
           Image.asset(
             AssetsPath.settings,
             fit: BoxFit.cover,
             excludeFromSemantics: true,
           ),
-          // Blur ?
+
+          // Blur
           ClipRect(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 11, sigmaY: 11),
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
                 // Todo: Farbe
-                color: ColorPalette.petrol1.withValues(alpha: 0.50),
+                color: ColorPalette.petrol0.withValues(alpha: 0.50),
               ),
             ),
           ),
+
+          // Content
           SafeArea(
             child: Column(
               children: [
@@ -115,7 +114,22 @@ class SettingsScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 50),
+
+                      const SizedBox(height: 8),
+
+                      // Logo
+                      Center(
+                        child: Image.asset(
+                          AssetsPath.logo,
+                          width: 160,
+                          height: 160,
+                          fit: BoxFit.contain,
+                          excludeFromSemantics: true,
+                        ),
+                      ),
+
+                      const SizedBox(height: 8),
+
                       // Headline
                       Semantics(
                         header: true,
@@ -134,130 +148,45 @@ class SettingsScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: [
-                          // CARD 1
-                          Card(
-                            elevation: 0, // oder 2
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.person),
-                                  title: Text('Account'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      context.pushNamed(AppRoutes.account),
-                                ),
-                                Divider(height: 1),
-                                ListTile(
-                                  leading: Icon(Icons.storage),
-                                  title: Text('Daten'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      //context.pushNamed(AppRoutes.data),
-                                      context.push('/settings/data'),
-                                ),
-                              ],
-                            ),
+                          SettingsCard(
+                            title: 'Profil',
+                            onTap: () => context.pushNamed(AppRoutes.account),
                           ),
-
-                          SizedBox(height: 8), // Spacing!
-                          // CARD 2 (Räume und Tätigkeiten)
-                          Card(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.add_home_rounded),
-                                  title: Text('Räume'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      context.pushNamed(AppRoutes.areas),
-                                ),
-                                Divider(height: 1),
-                                ListTile(
-                                  leading: Icon(
-                                    Icons.cleaning_services_rounded,
-                                  ),
-                                  title: Text('Tätigkeiten'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      //context.pushNamed(AppRoutes.activities),
-                                      context.push('/settings/activities'),
-                                ),
-                              ],
-                            ),
+                          const SizedBox(height: 24),
+                          SettingsCard(
+                            title: 'Räume',
+                            onTap: () => context.pushNamed(AppRoutes.areas),
                           ),
-
-                          SizedBox(height: 8),
-
-                          // CARD 3 ... (App + Darstellung)
-                          Card(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.ad_units),
-                                  title: Text('App'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      //context.pushNamed(AppRoutes.app),
-                                      context.push('/settings/app'),
-                                ),
-                                Divider(height: 1),
-                                ListTile(
-                                  leading: Icon(Icons.palette_rounded),
-                                  title: Text('Darstellung'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      //context.pushNamed(AppRoutes.design),
-                                      context.push('/settings/design'),
-                                ),
-                              ],
-                            ),
+                          const SizedBox(height: 8),
+                          SettingsCard(
+                            title: 'Tätigkeiten',
+                            enabled: false,
+                            onTap: () =>
+                                context.pushNamed(AppRoutes.activities),
                           ),
-                          SizedBox(height: 8),
-
-                          // CARD 4 ... (Datenschutz + Impressum + Version)
-                          Card(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: Icon(Icons.gpp_maybe_rounded),
-                                  title: Text('Datenschutz'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      //context.pushNamed(AppRoutes.privacy),
-                                      context.push('/settings/privacy'),
-                                ),
-                                Divider(height: 1),
-                                ListTile(
-                                  leading: Icon(Icons.info_rounded),
-                                  title: Text('Impressum'),
-                                  trailing: Icon(Icons.chevron_right),
-                                  onTap: () =>
-                                      //context.pushNamed(AppRoutes.imprint),
-                                      context.push('/settings/imprint'),
-                                ),
-                                Divider(height: 1),
-                                ListTile(
-                                  leading: Icon(Icons.fork_right_rounded),
-                                  title: Text('Version'),
-                                  trailing: Text('v1.0.0'),
-                                ),
-                              ],
-                            ),
+                          const SizedBox(height: 24),
+                          SettingsCard(
+                            title: 'Darstellung',
+                            enabled: false,
+                            onTap: () => context.pushNamed(AppRoutes.areas),
+                          ),
+                          const SizedBox(height: 32),
+                          SettingsCard(
+                            title: 'Datenschutz',
+                            enabled: false,
+                            onTap: () => context.pushNamed(AppRoutes.areas),
+                          ),
+                          const SizedBox(height: 8),
+                          SettingsCard(
+                            title: 'Impressum',
+                            enabled: false,
+                            onTap: () => context.pushNamed(AppRoutes.areas),
+                          ),
+                          const SizedBox(height: 8),
+                          SettingsCard(
+                            title: 'Version',
+                            enabled: false,
+                            onTap: () => context.pushNamed(AppRoutes.areas),
                           ),
                         ],
                       ),

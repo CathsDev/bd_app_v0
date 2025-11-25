@@ -1,6 +1,5 @@
 import 'dart:ui' show ImageFilter;
 
-import 'package:bd_app_v0/src/features/auth/state/auth_provider.dart';
 import 'package:bd_app_v0/src/shared/constants/assets.dart';
 import 'package:bd_app_v0/src/app/app_routes.dart';
 import 'package:bd_app_v0/src/app/theme/color_palette.dart';
@@ -16,10 +15,6 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authUser = ref.watch(currentUserProvider);
-    final String userLabel = (authUser?.email.trim().isNotEmpty ?? false)
-        ? authUser!.email.trim()
-        : (authUser?.id ?? 'Nicht angemeldet!');
     final screenHeight = MediaQuery.of(context).size.height;
     final headerHeight = screenHeight * 0.39;
     return Scaffold(
@@ -117,9 +112,10 @@ class HomeScreen extends ConsumerWidget {
                       child: Column(
                         children: [
                           HomeCard(
-                            title: 'Settings',
-                            subtitle: 'Settings für $userLabel',
-                            onTap: () => context.pushNamed(AppRoutes.settings),
+                            title: 'Los geht\'s',
+                            subtitle: 'Lass uns starten',
+                            onTap: () =>
+                                context.pushNamed(AppRoutes.moodSelect),
                           ),
                           const SizedBox(height: 12),
                           HomeCard(
@@ -129,10 +125,9 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 12),
                           HomeCard(
-                            title: 'Los geht\'s',
-                            subtitle: 'Lass uns starten',
-                            onTap: () =>
-                                context.pushNamed(AppRoutes.moodSelect),
+                            title: 'Einstellungen',
+                            subtitle: 'Profil, Darstellung, Daten ...',
+                            onTap: () => context.pushNamed(AppRoutes.settings),
                           ),
                         ],
                       ),
