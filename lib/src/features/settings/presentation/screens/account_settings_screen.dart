@@ -3,6 +3,8 @@ import 'package:bd_app_v0/src/app/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/auth/presentation/widgets/segment_button.dart';
 import 'package:bd_app_v0/src/features/auth/state/auth_controller.dart';
 import 'package:bd_app_v0/src/features/auth/state/auth_provider.dart';
+import 'package:bd_app_v0/src/features/settings/presentation/widgets/name_edit_sheet.dart';
+import 'package:bd_app_v0/src/features/settings/state/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +15,7 @@ class AccountSettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authUser = ref.watch(currentUserProvider);
+    final userAsync = ref.watch(userNotifierProvider);
     final String userEmail = (authUser?.email.trim().isNotEmpty ?? false)
         ? authUser!.email.trim()
         : (authUser?.id ?? 'Nicht angemeldet!');
@@ -22,6 +25,7 @@ class AccountSettingsScreen extends ConsumerWidget {
     int selectedIndex = 0;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       body: SafeArea(
         child: Column(
@@ -110,10 +114,51 @@ class AccountSettingsScreen extends ConsumerWidget {
                         child: Icon(Icons.person, size: 80),
                       ),
                       SizedBox(height: 16),
-                      Text(
+                      userAsync.when(
+                        data: (user) {
+                          return Text(
+                            user.name,
+                            style: TextStyles.textTheme.headlineSmall,
+                          );
+                        },
+                        error: (e, _) => Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: scheme.outline),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Namen eingeben',
+                                  style: TextStyles.textTheme.bodyLarge,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (ctx) =>
+                                        NameEditSheet(initialName: ''),
+                                  );
+                                },
+                                icon: Icon(Icons.edit),
+                              ),
+                            ],
+                          ),
+                        ),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
+                      ),
+                      /* Text(
                         'Max Mustermann',
                         style: TextStyles.textTheme.headlineSmall,
-                      ),
+                      ), */
                       SizedBox(height: 8),
                       Text(userEmail, style: TextStyles.textTheme.bodyLarge),
                     ],
@@ -128,18 +173,79 @@ class AccountSettingsScreen extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-
                       children: [
                         Text('Name'),
                         SizedBox(height: 8),
-                        TextField(
-                          decoration: InputDecoration(
-                            labelText: 'Max Mustermann',
-                            border: OutlineInputBorder(),
-                          ),
-                          onChanged: (text) {
-                            debugPrint("User entered: $text");
+                        userAsync.when(
+                          data: (user) {
+                            return Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: scheme.outline),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      user.name.isNotEmpty
+                                          ? user.name
+                                          : 'Namen eingeben',
+                                      style: TextStyles.textTheme.bodyLarge,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        isScrollControlled: true,
+                                        builder: (ctx) => NameEditSheet(
+                                          initialName: user.name,
+                                        ),
+                                      );
+                                    },
+                                    icon: Icon(Icons.edit),
+                                  ),
+                                ],
+                              ),
+                            );
                           },
+                          loading: () =>
+                              const Center(child: CircularProgressIndicator()),
+                          error: (e, _) => Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: scheme.outline),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Namen eingeben',
+                                    style: TextStyles.textTheme.bodyLarge,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      builder: (ctx) =>
+                                          NameEditSheet(initialName: ''),
+                                    );
+                                  },
+                                  icon: Icon(Icons.edit),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -153,15 +259,39 @@ class AccountSettingsScreen extends ConsumerWidget {
                       children: [
                         Text('Email'),
                         SizedBox(height: 8),
-                        TextField(
-                          decoration: InputDecoration(
-                            labelText: userEmail,
-                            border: OutlineInputBorder(),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
                           ),
-                          enabled: false,
-                          onChanged: (text) {
-                            debugPrint("User entered: $text");
-                          },
+                          decoration: BoxDecoration(
+                            border: Border.all(color: scheme.outline),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  userEmail.isNotEmpty
+                                      ? userEmail
+                                      : 'Email eingeben',
+                                  style: TextStyles.textTheme.bodyLarge,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: null,
+                                /* onPressed: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (ctx) =>
+                                        NameEditSheet(initialName: userEmail),
+                                  );
+                                }, */
+                                icon: Icon(Icons.edit),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
