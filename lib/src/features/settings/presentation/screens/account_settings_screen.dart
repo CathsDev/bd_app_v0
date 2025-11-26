@@ -1,4 +1,5 @@
 import 'package:bd_app_v0/src/app/app_routes.dart';
+import 'package:bd_app_v0/src/app/theme/app_colors.dart';
 import 'package:bd_app_v0/src/app/theme/text_styles.dart';
 import 'package:bd_app_v0/src/features/auth/presentation/widgets/segment_button.dart';
 import 'package:bd_app_v0/src/features/auth/state/auth_controller.dart';
@@ -317,9 +318,47 @@ class AccountSettingsScreen extends ConsumerWidget {
                             child: SegmentButton(
                               label: 'Ausloggen',
                               selected: selectedIndex == 0,
-                              onTap: () => ref
-                                  .read(authNotifierProvider.notifier)
-                                  .signOut(),
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text('Ausloggen'),
+                                    content: Text('Wirklich ausloggen?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          context.pop();
+                                        },
+                                        child: Text(
+                                          'Abbrechen',
+                                          style: TextStyle(
+                                            color: AppColors
+                                                .darkColorScheme
+                                                .onSurface,
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          ref
+                                              .read(
+                                                authNotifierProvider.notifier,
+                                              )
+                                              .signOut();
+                                        },
+                                        child: Text(
+                                          'Ok',
+                                          style: TextStyle(
+                                            color: AppColors
+                                                .darkColorScheme
+                                                .onSurface,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           const SizedBox(width: 8),
