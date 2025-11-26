@@ -1,10 +1,14 @@
+import 'package:bd_app_v0/src/features/settings/data/user_repository.dart';
+import 'package:bd_app_v0/src/features/settings/domain/user_profile.dart';
+import 'package:bd_app_v0/src/features/settings/state/user_provider.dart';
 import 'package:bd_app_v0/src/shared/providers/firebase_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthRepository {
   final FirebaseAuth _firebaseAuth;
-  AuthRepository(this._firebaseAuth);
+  final UserRepository _userRepo;
+  AuthRepository(this._firebaseAuth, this._userRepo);
 
   Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
@@ -22,6 +26,9 @@ class AuthRepository {
       throw Exception('Sign in failed');
     }
 
+    final user = UserProfile(name: '', email: userCredential.user!.email ?? '');
+    _userRepo.saveUser(user);
+
     return UserModel.fromFirebaseUser(userCredential.user!);
   }
 
@@ -36,6 +43,9 @@ class AuthRepository {
       throw Exception('Registration failed');
     }
 
+    final user = UserProfile(name: '', email: userCredential.user!.email ?? '');
+    await _userRepo.saveUser(user);
+
     return UserModel.fromFirebaseUser(userCredential.user!);
   }
 
@@ -45,8 +55,9 @@ class AuthRepository {
   }
 }
 
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepository(ref.watch(firebaseAuthProvider));
+final authRepositoryProvider = FutureProvider<AuthRepository>((ref) async {
+  final userRepo = await ref.watch(userRepositoryProvider.future);
+  return AuthRepository(ref.watch(firebaseAuthProvider), userRepo);
 });
 
 class UserModel extends UserEntity {

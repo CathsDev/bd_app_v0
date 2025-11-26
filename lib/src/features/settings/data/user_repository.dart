@@ -1,6 +1,6 @@
-import 'package:bd_app_v0/src/features/settings/domain/user.dart';
+import 'package:bd_app_v0/src/features/settings/domain/user_profile.dart';
 
 abstract class UserRepository {
-  Future<User> loadUser();
-  Future<void> saveUser(User user);
+  Future<UserProfile> loadUser();
+  Future<void> saveUser(UserProfile user);
 }

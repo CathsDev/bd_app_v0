@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Firebase Auth Changes
-final authStateProvider = StreamProvider<User?>((ref) {
-  final authRepository = ref.watch(authRepositoryProvider);
-  return authRepository.authStateChanges;
+final authStateProvider = StreamProvider<User?>((ref) async* {
+  final authRepository = await ref.watch(authRepositoryProvider.future);
+  yield* authRepository.authStateChanges;
 });
 
 // Current User

@@ -1,10 +1,10 @@
 import 'dart:ui' show ImageFilter;
 
+import 'package:bd_app_v0/src/features/auth/state/auth_controller.dart';
 import 'package:bd_app_v0/src/shared/constants/assets.dart';
 import 'package:bd_app_v0/src/app/app_routes.dart';
 import 'package:bd_app_v0/src/app/theme/color_palette.dart';
 import 'package:bd_app_v0/src/app/theme/text_styles.dart';
-import 'package:bd_app_v0/src/features/auth/data/auth_repository.dart';
 import 'package:bd_app_v0/src/features/home/presentation/widgets/home_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -70,7 +70,7 @@ class HomeScreen extends ConsumerWidget {
                                     color: Colors.white,
                                   ),
                                   onPressed: () => ref
-                                      .read(authRepositoryProvider)
+                                      .read(authNotifierProvider.notifier)
                                       .signOut(),
                                 ),
                               ),

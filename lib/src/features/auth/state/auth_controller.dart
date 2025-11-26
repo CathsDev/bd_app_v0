@@ -9,7 +9,7 @@ class AuthNotifier extends Notifier<AuthActionState> {
   Future<void> signIn(String email, String password) async {
     state = const AuthActionState.loading();
     try {
-      final repository = ref.read(authRepositoryProvider);
+      final repository = await ref.read(authRepositoryProvider.future);
       await repository.signIn(email, password);
       state = const AuthActionState.success();
     } catch (e) {
@@ -21,7 +21,7 @@ class AuthNotifier extends Notifier<AuthActionState> {
     state = const AuthActionState.loading();
 
     try {
-      final repository = ref.read(authRepositoryProvider);
+      final repository = await ref.read(authRepositoryProvider.future);
       await repository.register(email, password);
       state = const AuthActionState.success();
     } catch (e) {
@@ -33,7 +33,7 @@ class AuthNotifier extends Notifier<AuthActionState> {
     state = const AuthActionState.loading();
 
     try {
-      final repository = ref.read(authRepositoryProvider);
+      final repository = await ref.read(authRepositoryProvider.future);
       await repository.signOut();
       state = const AuthActionState.success();
     } catch (e) {

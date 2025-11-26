@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:bd_app_v0/src/features/settings/domain/user.dart';
+import 'package:bd_app_v0/src/features/settings/domain/user_profile.dart';
 import 'package:bd_app_v0/src/features/settings/state/user_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserNotifier extends AsyncNotifier<User> {
+class UserNotifier extends AsyncNotifier<UserProfile> {
   @override
-  FutureOr<User> build() async {
+  FutureOr<UserProfile> build() async {
     final userRepo = await ref.watch(userRepositoryProvider.future);
     return userRepo.loadUser();
   }

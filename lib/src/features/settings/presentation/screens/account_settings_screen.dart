@@ -1,7 +1,7 @@
 import 'package:bd_app_v0/src/app/app_routes.dart';
 import 'package:bd_app_v0/src/app/theme/text_styles.dart';
-import 'package:bd_app_v0/src/features/auth/data/auth_repository.dart';
 import 'package:bd_app_v0/src/features/auth/presentation/widgets/segment_button.dart';
+import 'package:bd_app_v0/src/features/auth/state/auth_controller.dart';
 import 'package:bd_app_v0/src/features/auth/state/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -187,8 +187,9 @@ class AccountSettingsScreen extends ConsumerWidget {
                             child: SegmentButton(
                               label: 'Ausloggen',
                               selected: selectedIndex == 0,
-                              onTap: () =>
-                                  ref.read(authRepositoryProvider).signOut(),
+                              onTap: () => ref
+                                  .read(authNotifierProvider.notifier)
+                                  .signOut(),
                             ),
                           ),
                           const SizedBox(width: 8),
