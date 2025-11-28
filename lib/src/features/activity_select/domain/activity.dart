@@ -50,4 +50,29 @@ const activities = <Activity>[
     title: 'Haustiere',
     imagePath: AssetsPath.areaPlaceholder,
   ),
+  Activity(
+    id: 'wiping',
+    title: 'Wischen',
+    imagePath: AssetsPath.areaPlaceholder,
+  ),
+  Activity(
+    id: 'decluttering',
+    title: 'Declutter',
+    imagePath: AssetsPath.areaPlaceholder,
+  ),
+  Activity(
+    id: 'vacuuming',
+    title: 'Staubsaugen',
+    imagePath: AssetsPath.areaPlaceholder,
+  ),
+  Activity(
+    id: 'dusting',
+    title: 'Staub wischen',
+    imagePath: AssetsPath.areaPlaceholder,
+  ),
+  Activity(
+    id: 'sorting',
+    title: 'Sortieren',
+    imagePath: AssetsPath.areaPlaceholder,
+  ),
 ];

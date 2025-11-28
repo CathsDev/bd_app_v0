@@ -319,7 +319,7 @@ const tasks = <Task>[
     title: "Wohnzimmer aufräumen",
     category: TaskCategories.organize,
     relatedAreas: ["living"],
-    relatedActivities: ["organizing", "tidying"],
+    relatedActivities: ["organizing"],
     cooldownDays: 3,
     variants: [
       TaskVariant(
@@ -398,7 +398,7 @@ const tasks = <Task>[
     id: "bedroom_change_bedding",
     title: "Bettwäsche wechseln",
     category: TaskCategories.cleaning,
-    relatedAreas: ["bedroom", "guest"],
+    relatedAreas: ["bedroom", "guestroom"],
     relatedActivities: ["cleaning", "laundry"],
     cooldownDays: 14,
     variants: [
@@ -437,7 +437,7 @@ const tasks = <Task>[
     id: "bedroom_make_bed",
     title: "Bett machen",
     category: TaskCategories.organize,
-    relatedAreas: ["bedroom", "guest"],
+    relatedAreas: ["bedroom", "guestroom"],
     relatedActivities: ["organizing"],
     cooldownDays: 1,
     variants: [
@@ -556,7 +556,7 @@ const tasks = <Task>[
     title: "Spielzeug aufräumen",
     category: TaskCategories.organize,
     relatedAreas: ["kidsroom"],
-    relatedActivities: ["organizing", "tidying"],
+    relatedActivities: ["organizing"],
     cooldownDays: 1,
     variants: [
       TaskVariant(
@@ -753,7 +753,7 @@ const tasks = <Task>[
     title: "Flur wischen",
     category: TaskCategories.cleaning,
     relatedAreas: ["hallway"],
-    relatedActivities: ["cleaning", "mopping"],
+    relatedActivities: ["cleaning", "wiping"],
     cooldownDays: 7,
     variants: [
       TaskVariant(
@@ -948,7 +948,7 @@ const tasks = <Task>[
     title: "Balkon fegen",
     category: TaskCategories.cleaning,
     relatedAreas: ["balcony", "terrace"],
-    relatedActivities: ["cleaning", "sweeping"],
+    relatedActivities: ["cleaning"],
     cooldownDays: 14,
     variants: [
       TaskVariant(
@@ -1105,7 +1105,7 @@ const tasks = <Task>[
     title: "Müll entsorgen",
     category: TaskCategories.declutter,
     relatedAreas: ["kitchen", "bath", "bedroom", "office", "guestbath"],
-    relatedActivities: ["decluttering", "disposing"],
+    relatedActivities: ["decluttering"],
     cooldownDays: 3,
     variants: [
       TaskVariant(
@@ -1144,7 +1144,7 @@ const tasks = <Task>[
     title: "Wäsche waschen",
     category: TaskCategories.cleaning,
     relatedAreas: ["bath", "guestbath", "bedroom", "laundry"],
-    relatedActivities: ["washing", "laundry"],
+    relatedActivities: ["laundry"],
     cooldownDays: 2,
     variants: [
       TaskVariant(
@@ -1183,7 +1183,7 @@ const tasks = <Task>[
     title: "Boden wischen",
     category: TaskCategories.cleaning,
     relatedAreas: ["kitchen", "bath", "guestbath", "hallway"],
-    relatedActivities: ["mopping", "cleaning"],
+    relatedActivities: ["wiping", "cleaning"],
     cooldownDays: 7,
     variants: [
       TaskVariant(
