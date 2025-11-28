@@ -16,9 +16,8 @@ class SettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cardColor = enabled
-        ? ColorPalette
-              .petrol2 // Blau-grün
-        : ColorPalette.petrol2.withValues(alpha: 0.6); // Dunkelgrau
+        ? ColorPalette.petrol2
+        : ColorPalette.petrol2.withValues(alpha: 0.6);
 
     final textColor = enabled
         ? ColorPalette.text0

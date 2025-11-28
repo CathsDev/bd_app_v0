@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
-  /// Session (mood + area/activity)
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   final session = ref.watch(sessionProvider);
@@ -22,7 +21,7 @@ final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
     throw Exception('Kein Mood gesetzt - Das sollte nicht passieren!');
   }
 
-  // Von String ID => Mood Objekt => energyLevel
+  // Mood Objekt => energyLevel
   final energy = moods.firstWhere((mood) => mood.id == moodId).energyLevel;
 
   // Area/Activity Check
@@ -58,23 +57,23 @@ final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
     completedTasks = Map<String, dynamic>.from(jsonDecode(cooldownJson));
   }
 
-  // Filter Tasks mit aktivem Cooldown raus
+  // Filtert Tasks mit aktivem Cooldown raus
   filteredTasks = filteredTasks.where((task) {
     // Wenn Task nicht completed ist => verfügbar
     if (!completedTasks.containsKey(task.id)) {
       return true;
     }
 
-    // Task wurde completed → check Cooldown
+    // Task completed => check Cooldown
     final completedAtString = completedTasks[task.id];
     final completedAt = DateTime.parse(completedAtString);
     final cooldownEnd = completedAt.add(Duration(days: task.cooldownDays));
 
-    // Wenn Cooldown vorbei => verfügbar
+    // Cooldown vorbei => verfügbar
     return cooldownEnd.isBefore(DateTime.now());
   }).toList();
 
-  // Für jeden Task die passende Variant finden
+  // Task für Variante finden
   final tasksWithVariants = filteredTasks
       .map((task) {
         try {
@@ -89,7 +88,7 @@ final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
       .whereType<TaskWithVariant>()
       .toList();
 
-  // Todo: Nimm einfach bis zu 3 Tasks für MVP
+  // Todo: 3 Tasks für MVP
   return tasksWithVariants.take(3).toList();
 });
 

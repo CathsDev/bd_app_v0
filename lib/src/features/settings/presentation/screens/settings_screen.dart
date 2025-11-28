@@ -34,7 +34,6 @@ class SettingsScreen extends ConsumerWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
-                // Todo: Farbe
                 color: ColorPalette.petrol0.withValues(alpha: 0.50),
               ),
             ),
@@ -109,10 +108,7 @@ class SettingsScreen extends ConsumerWidget {
                                   ),
                                   tooltip: 'Home',
                                   onPressed: () {
-                                    final router = GoRouter.of(context);
-                                    router.canPop()
-                                        ? router.pop()
-                                        : context.goNamed(AppRoutes.home);
+                                    context.goNamed(AppRoutes.home);
                                   },
                                 ),
                               ),
@@ -158,7 +154,7 @@ class SettingsScreen extends ConsumerWidget {
                             title: 'Profil',
                             onTap: () => context.pushNamed(AppRoutes.account),
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 16),
                           SettingsCard(
                             title: 'Räume',
                             onTap: () => context.pushNamed(AppRoutes.areas),
@@ -170,13 +166,13 @@ class SettingsScreen extends ConsumerWidget {
                             onTap: () =>
                                 context.pushNamed(AppRoutes.activities),
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 16),
                           SettingsCard(
                             title: 'Darstellung',
                             enabled: false,
                             onTap: () => context.pushNamed(AppRoutes.areas),
                           ),
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 16),
                           SettingsCard(
                             title: 'Datenschutz',
                             enabled: false,

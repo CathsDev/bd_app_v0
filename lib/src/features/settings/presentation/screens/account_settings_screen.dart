@@ -93,10 +93,7 @@ class AccountSettingsScreen extends ConsumerWidget {
                               icon: Icon(Icons.home, color: scheme.onSecondary),
                               tooltip: 'Home',
                               onPressed: () {
-                                final router = GoRouter.of(context);
-                                router.canPop()
-                                    ? router.pop()
-                                    : context.goNamed(AppRoutes.home);
+                                context.goNamed(AppRoutes.home);
                               },
                             ),
                           ),
@@ -156,10 +153,6 @@ class AccountSettingsScreen extends ConsumerWidget {
                         loading: () =>
                             const Center(child: CircularProgressIndicator()),
                       ),
-                      /* Text(
-                        'Max Mustermann',
-                        style: TextStyles.textTheme.headlineSmall,
-                      ), */
                       SizedBox(height: 8),
                       Text(userEmail, style: TextStyles.textTheme.bodyLarge),
                     ],
@@ -281,14 +274,6 @@ class AccountSettingsScreen extends ConsumerWidget {
                               ),
                               IconButton(
                                 onPressed: null,
-                                /* onPressed: () {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    isScrollControlled: true,
-                                    builder: (ctx) =>
-                                        NameEditSheet(initialName: userEmail),
-                                  );
-                                }, */
                                 icon: Icon(Icons.edit),
                               ),
                             ],

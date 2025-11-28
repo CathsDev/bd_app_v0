@@ -46,7 +46,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         return '/';
       }
 
-      return null; // No redirect
+      return null;
     },
     routes: [
       GoRoute(
@@ -57,7 +57,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const OnboardingScreen(),
         ),
-        //builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
         path: '/',
@@ -67,7 +66,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const HomeScreen(),
         ),
-        //builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
         path: '/mood-select',
@@ -77,7 +75,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const MoodSelectScreen(),
         ),
-        //builder: (context, state) => const MoodSelectScreen(),
       ),
       GoRoute(
         path: '/mode-select',
@@ -87,7 +84,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const ModeSelectScreen(),
         ),
-        //builder: (context, state) => const ModeSelectScreen(),
       ),
       GoRoute(
         path: '/area-select',
@@ -97,7 +93,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const AreaSelectScreen(),
         ),
-        //builder: (context, state) => const AreaSelectScreen(),
       ),
       GoRoute(
         path: '/activity-select',
@@ -107,7 +102,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const ActivitySelectScreen(),
         ),
-        //builder: (context, state) => const ActivitySelectScreen(),
       ),
       GoRoute(
         path: '/task-select',
@@ -117,7 +111,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const TaskSelectScreen(),
         ),
-        //builder: (context, state) => const TaskTimerScreen(),
       ),
       GoRoute(
         path: '/task-timer',
@@ -127,7 +120,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const TaskTimerScreen(),
         ),
-        //builder: (context, state) => const TaskTimerScreen(),
       ),
       GoRoute(
         path: '/task-complete',
@@ -137,7 +129,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const TaskCompleteScreen(),
         ),
-        //builder: (context, state) => const TaskCompleteScreen(),
       ),
       GoRoute(
         path: '/settings',
@@ -147,7 +138,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const SettingsScreen(),
         ),
-        //builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: '/settings/account',
@@ -157,7 +147,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const AccountSettingsScreen(),
         ),
-        //builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: '/settings/areas',
@@ -167,7 +156,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const AreasSettingsScreen(),
         ),
-        //builder: (context, state) => const SettingsScreen(),
       ),
       GoRoute(
         path: '/emergency',
@@ -177,7 +165,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           allowSnapshotting: false,
           child: const EmergencyScreen(),
         ),
-        //builder: (context, state) => const EmergencyScreen(),
       ),
     ],
     errorBuilder: (context, state) =>

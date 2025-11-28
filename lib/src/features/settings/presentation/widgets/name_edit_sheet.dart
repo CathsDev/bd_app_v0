@@ -77,20 +77,6 @@ class _NameEditSheetState extends ConsumerState<NameEditSheet> {
                   ),
                 ),
                 const SizedBox(height: 12),
-
-                // Error Message
-                /* if (errorMessage != null)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Text(
-                        errorMessage,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      ),
-                    ),
-               */
                 // Submit Button
                 FilledButton(
                   style: FilledButton.styleFrom(

@@ -33,9 +33,8 @@ class HomeScreen extends ConsumerWidget {
           // Blur
           ClipRect(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
-                // Todo: Farbe
                 color: ColorPalette.petrol0.withValues(alpha: 0.50),
               ),
             ),
@@ -118,13 +117,13 @@ class HomeScreen extends ConsumerWidget {
                             onTap: () =>
                                 context.pushNamed(AppRoutes.moodSelect),
                           ),
-                          const SizedBox(height: 12),
+                          const SizedBox(height: 16),
                           HomeCard(
                             title: 'Weiter machen',
                             subtitle: 'Derzeit nicht verfügbar',
                             enabled: false,
                           ),
-                          const SizedBox(height: 12),
+                          const SizedBox(height: 16),
                           HomeCard(
                             title: 'Einstellungen',
                             subtitle: 'Profil, Darstellung, Daten ...',
