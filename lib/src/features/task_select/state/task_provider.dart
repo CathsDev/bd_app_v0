@@ -1,14 +1,21 @@
 import 'dart:convert';
 
+import 'package:bd_app_v0/src/features/auth/state/auth_provider.dart';
 import 'package:bd_app_v0/src/shared/providers/session_provider.dart';
 import 'package:bd_app_v0/src/features/mood_select/domain/mood.dart';
 import 'package:bd_app_v0/src/features/task_select/domain/task.dart';
 import 'package:bd_app_v0/src/shared/state/areas/areas_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final prefs = await ref.watch(sharedPreferencesProvider.future);
+  final user = ref.watch(currentUserProvider);
+
+  if (user == null) {
+    throw Exception('Kein User gefunden');
+  }
+
+  final kCompletedTaskKey = 'users_${user.id}_completed_tasks';
 
   final session = ref.watch(sessionProvider);
   final moodId = session.mood;
@@ -50,7 +57,7 @@ final taskProvider = FutureProvider<List<TaskWithVariant>>((ref) async {
   }
 
   // Cooldown Filtering
-  final String? cooldownJson = prefs.getString('completed_tasks');
+  final String? cooldownJson = prefs.getString(kCompletedTaskKey);
   Map<String, dynamic> completedTasks = {};
 
   if (cooldownJson != null) {

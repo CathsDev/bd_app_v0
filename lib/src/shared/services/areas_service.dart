@@ -22,8 +22,11 @@ class AreasService {
     return areas;
   }
 
-  Future<void> initializeUserAreas(SharedPreferences prefs) async {
-    final kUserAreas = 'user_areas';
+  Future<void> initializeUserAreas(
+    SharedPreferences prefs,
+    String userId,
+  ) async {
+    final kUserAreas = 'users_${userId}_areas';
     final localUserAreas = prefs.getStringList(kUserAreas);
     if (localUserAreas != null) return;
     try {

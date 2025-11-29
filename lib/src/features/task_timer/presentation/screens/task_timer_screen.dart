@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:bd_app_v0/src/features/auth/state/auth_provider.dart';
 import 'package:bd_app_v0/src/shared/providers/session_provider.dart';
 import 'package:bd_app_v0/src/app/app_routes.dart';
 import 'package:bd_app_v0/src/app/theme/color_palette.dart';
@@ -126,10 +127,14 @@ class TaskTimerScreen extends ConsumerWidget {
                                     backgroundColor: scheme.secondary,
                                   ),
                                   onPressed: () async {
+                                    final user = ref.read(currentUserProvider);
+                                    if (user == null) return;
+                                    final kCompletedTasksKey =
+                                        'users_${user.id}_completed_tasks';
                                     final SharedPreferences prefs =
                                         await SharedPreferences.getInstance();
                                     final String? jsonString = prefs.getString(
-                                      'completed_tasks',
+                                      kCompletedTasksKey,
                                     );
                                     Map<String, String> completedTasks = {};
                                     if (jsonString != null) {
@@ -141,7 +146,7 @@ class TaskTimerScreen extends ConsumerWidget {
                                         DateTime.now().toIso8601String();
 
                                     prefs.setString(
-                                      'completed_tasks',
+                                      kCompletedTasksKey,
                                       jsonEncode(completedTasks),
                                     );
                                     debugPrint('Saved: $completedTasks');

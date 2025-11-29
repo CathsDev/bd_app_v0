@@ -1,6 +1,5 @@
 import 'package:bd_app_v0/firebase_options.dart';
 import 'package:bd_app_v0/src/app/app.dart';
-import 'package:bd_app_v0/src/shared/services/areas_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,9 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    AreasService service = AreasService();
-    await service.initializeUserAreas(prefs);
+    await SharedPreferences.getInstance();
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );

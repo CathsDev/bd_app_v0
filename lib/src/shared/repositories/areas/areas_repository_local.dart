@@ -6,14 +6,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AreasRepositoryLocal implements AreasRepository {
   final SharedPreferences _preferences;
+  final String _userId;
 
-  AreasRepositoryLocal({required SharedPreferences preferences})
-    : _preferences = preferences;
+  AreasRepositoryLocal({
+    required SharedPreferences preferences,
+    required String userId,
+  }) : _preferences = preferences,
+       _userId = userId;
 
-  static const _kAreasKey = 'user_areas';
+  String get _areasKey => 'users_${_userId}_areas';
 
   Future<List<Area>> _loadAreas() async {
-    final areaList = _preferences.getStringList(_kAreasKey) ?? const <String>[];
+    final areaList = _preferences.getStringList(_areasKey) ?? const <String>[];
     final areas = areaList
         .map(
           (jsonString) =>
@@ -30,7 +34,7 @@ class AreasRepositoryLocal implements AreasRepository {
 
   Future<void> _saveAreas(List<Area> areas) async {
     final areaList = areas.map((area) => jsonEncode(area.toJson())).toList();
-    await _preferences.setStringList(_kAreasKey, areaList);
+    await _preferences.setStringList(_areasKey, areaList);
   }
 
   @override

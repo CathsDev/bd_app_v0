@@ -6,15 +6,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepositoryLocal implements UserRepository {
   final SharedPreferences _preferences;
+  final String _userId;
 
-  UserRepositoryLocal({required SharedPreferences preferences})
-    : _preferences = preferences;
+  UserRepositoryLocal({
+    required SharedPreferences preferences,
+    required String userId,
+  }) : _preferences = preferences,
+       _userId = userId;
 
-  static const _kUserKey = 'user-profile';
+  String get _userProfileKey => 'users_${_userId}_profile';
 
   @override
   Future<UserProfile> loadUser() async {
-    final userString = _preferences.getString(_kUserKey);
+    final userString = _preferences.getString(_userProfileKey);
 
     if (userString != null) {
       return UserProfile.fromJson(jsonDecode(userString));
@@ -26,6 +30,6 @@ class UserRepositoryLocal implements UserRepository {
   @override
   Future<void> saveUser(UserProfile user) async {
     final userString = jsonEncode(user.toJson());
-    await _preferences.setString(_kUserKey, userString);
+    await _preferences.setString(_userProfileKey, userString);
   }
 }
